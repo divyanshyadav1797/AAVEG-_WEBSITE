@@ -31,44 +31,50 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-400 ease-out ${
-          scrolled
-            ? 'py-3 bg-[#08090B]/90 backdrop-blur-md border-b border-[#FF4D00]/25 shadow-[0_10px_30px_rgba(0,0,0,0.85)]'
-            : 'py-5 bg-gradient-to-b from-[#050505]/95 via-[#050505]/60 to-transparent border-b border-[#FF4D00]/10'
-        }`}
         style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          zIndex: 50,
+          padding: scrolled ? '0.75rem 0' : '1.25rem 0',
+          backgroundColor: scrolled ? 'rgba(8, 9, 11, 0.9)' : 'transparent',
+          backgroundImage: scrolled ? 'none' : 'linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.6), transparent)',
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255, 77, 0, 0.25)' : '1px solid rgba(255, 77, 0, 0.1)',
+          boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.85)' : 'none',
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        <div className="container flex-between" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
           {/* Dedicated Replaceable College Logo Area */}
           <Link
             to="/"
-            className="flex items-center gap-3 group interactive-cursor"
             style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
             title="AAVEG 2026 - Poornima College of Engineering"
           >
             <div
-              className="logo-wrapper relative"
               style={{
                 height: scrolled ? '42px' : '52px',
                 maxWidth: '240px',
                 display: 'flex',
                 alignItems: 'center',
                 transition: 'height 0.3s ease',
+                position: 'relative',
               }}
             >
               {/* College Logo Image */}
               <img
                 src={collegeLogo}
                 alt="Poornima College of Engineering Logo"
-                className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 style={{
                   height: '100%',
                   width: 'auto',
                   objectFit: 'contain',
                   filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.8))',
+                  transition: 'transform 0.3s ease',
                 }}
                 onError={(e) => {
                   e.target.style.display = 'none';
@@ -78,13 +84,24 @@ export default function Header() {
               />
               
               <div
-                className="logo-fallback hidden flex-col justify-center"
-                style={{ display: 'none' }}
+                className="logo-fallback"
+                style={{ display: 'none', flexDirection: 'column', justifyContent: 'center' }}
               >
-                <span className="font-cinematic text-sm font-bold text-white tracking-wider">
+                <span style={{
+                  fontFamily: 'var(--font-cinematic)',
+                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: '#fff',
+                  letterSpacing: '0.1em',
+                }}>
                   POORNIMA
                 </span>
-                <span className="text-[10px] text-gray-400 tracking-widest uppercase">
+                <span style={{
+                  fontSize: '10px',
+                  color: '#9ca3af',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                }}>
                   COLLEGE OF ENGINEERING
                 </span>
               </div>
@@ -100,14 +117,20 @@ export default function Header() {
                   <Magnetic key={item.label} strength={0.2}>
                     <Link
                       to={item.to}
-                      className="interactive-cursor relative py-1 text-[13px] font-semibold tracking-[0.16em] uppercase transition-colors duration-300 hover:text-[#FF5A14]"
                       style={{
                         color: isActive ? '#FF5A14' : 'var(--text-secondary)',
                         letterSpacing: '0.16em',
                         fontSize: '13px',
                         textDecoration: 'none',
                         display: 'inline-block',
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        padding: '4px 0',
+                        position: 'relative',
+                        transition: 'color 0.3s ease',
                       }}
+                      onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = '#FF5A14'; }}
+                      onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)'; }}
                     >
                       {isActive ? (
                         <ShinyText text={item.label} shimmerColor="#FFA04D" />
@@ -122,14 +145,20 @@ export default function Header() {
                 <Magnetic key={item.label} strength={0.2}>
                   <a
                     href={item.href}
-                    className="interactive-cursor relative py-1 text-[13px] font-semibold tracking-[0.16em] uppercase transition-colors duration-300 hover:text-[#FF5A14]"
                     style={{
                       color: 'var(--text-secondary)',
                       letterSpacing: '0.16em',
                       fontSize: '13px',
                       textDecoration: 'none',
                       display: 'inline-block',
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      padding: '4px 0',
+                      position: 'relative',
+                      transition: 'color 0.3s ease',
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = '#FF5A14'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                   >
                     {item.label}
                   </a>
@@ -154,7 +183,7 @@ export default function Header() {
                     variant="primary"
                     size="sm"
                     icon={<Shield size={14} />}
-                    className="shadow-[0_0_20px_rgba(255,77,0,0.4)]"
+                    style={{ boxShadow: '0 0 20px rgba(255,77,0,0.4)' }}
                   >
                     {primaryCTA.label}
                   </Button>
@@ -162,22 +191,30 @@ export default function Header() {
               </Magnetic>
             </div>
 
-            {/* Mobile Menu Trigger */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="interactive-cursor md:hidden flex-center p-2 rounded-lg text-white"
-              style={{
-                display: 'none',
-                background: 'rgba(255, 77, 0, 0.15)',
-                border: '1px solid rgba(255, 77, 0, 0.35)',
-                color: '#FFFFFF',
-              }}
-              id="mobile-menu-toggle"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            {/* Mobile Menu Trigger with Magnetic feel */}
+            <div className="mobile-only">
+              <Magnetic strength={0.3}>
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    background: 'rgba(255, 77, 0, 0.15)',
+                    border: '1px solid rgba(255, 77, 0, 0.35)',
+                    color: '#FFFFFF',
+                    cursor: 'pointer',
+                  }}
+                  id="mobile-menu-toggle"
+                  aria-label="Toggle navigation menu"
+                >
+                  {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                </button>
+              </Magnetic>
+            </div>
           </div>
 
         </div>

@@ -10,14 +10,16 @@ import FloatingElements from '../components/ui/FloatingElements';
 export default function LeaderboardPage() {
   return (
     <div
-      className="leaderboard-page relative min-h-screen w-full"
+      className="leaderboard-page"
       style={{
         paddingTop: 'calc(var(--header-height) + 1.5rem)',
         paddingBottom: '5rem',
         backgroundColor: '#040507',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'visible',
+        width: '100%',
+        color: '#EDE8E1',
       }}
     >
       {/* Aceternity Grid Background */}

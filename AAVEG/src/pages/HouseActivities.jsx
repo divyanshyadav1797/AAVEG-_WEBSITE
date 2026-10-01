@@ -59,7 +59,7 @@ export default function HouseActivities() {
 
   return (
     <div
-      className="house-activities-page relative min-h-screen w-full"
+      className="house-activities-page"
       style={{
         paddingTop: 'calc(var(--header-height) + 2rem)',
         paddingBottom: '5rem',

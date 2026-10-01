@@ -108,14 +108,26 @@ export default function CircularHouseSelector({ onSelectHouse }) {
       <GridBackground color={`${currentHouse.color}15`} maskRadius="60%">
         <div
           className="radial-stage relative"
+          onTouchStart={(e) => {
+            startX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            const diff = e.changedTouches[0].clientX - startX.current;
+            if (diff > 45) {
+              prevHouse();
+            } else if (diff < -45) {
+              nextHouse();
+            }
+          }}
           style={{
             position: 'relative',
-            width: 'clamp(320px, 85vw, 640px)',
-            height: 'clamp(320px, 85vw, 640px)',
+            width: 'clamp(280px, 86vw, 620px)',
+            height: 'clamp(280px, 86vw, 620px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto',
+            touchAction: 'pan-y',
           }}
         >
           {/* Outer Gothic Astrolabe Compass Ring */}
@@ -168,17 +180,18 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                     position: 'absolute',
                     left: `${x}%`,
                     top: `${y}%`,
-                    transform: `translate(-50%, -50%) rotate(${-rotationAngle}deg) scale(${isActive ? 1.25 : 0.95})`,
+                    transform: `translate(-50%, -50%) rotate(${-rotationAngle}deg) scale(${isActive ? 1.22 : 0.95})`,
                     transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease',
                     zIndex: isActive ? 20 : 10,
                     cursor: 'pointer',
+                    touchAction: 'manipulation',
                   }}
                 >
                   {/* Node Orb */}
                   <div
                     style={{
-                      width: 'clamp(46px, 10vw, 68px)',
-                      height: 'clamp(46px, 10vw, 68px)',
+                      width: 'clamp(40px, 9vw, 66px)',
+                      height: 'clamp(40px, 9vw, 66px)',
                       borderRadius: '50%',
                       background: isActive
                         ? `radial-gradient(circle at 35% 35%, ${house.color} 0%, #150805 100%)`
@@ -195,15 +208,15 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                       backdropFilter: 'blur(10px)',
                     }}
                   >
-                    <span style={{ fontSize: 'clamp(1rem, 2.2vw, 1.4rem)' }}>{house.sigil}</span>
+                    <span style={{ fontSize: 'clamp(0.95rem, 2vw, 1.35rem)' }}>{house.sigil}</span>
                     <span
                       style={{
-                        fontSize: '0.62rem',
+                        fontSize: '0.6rem',
                         fontFamily: 'var(--font-cinematic)',
                         fontWeight: '800',
                         letterSpacing: '0.08em',
                         color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                        marginTop: '2px',
+                        marginTop: '1px',
                       }}
                     >
                       H{house.number}
@@ -225,8 +238,8 @@ export default function CircularHouseSelector({ onSelectHouse }) {
             style={{
               position: 'relative',
               zIndex: 15,
-              width: 'clamp(210px, 48vw, 320px)',
-              height: 'clamp(210px, 48vw, 320px)',
+              width: 'clamp(185px, 48vw, 310px)',
+              height: 'clamp(185px, 48vw, 310px)',
             }}
           >
             <div

@@ -73,13 +73,14 @@ export default function HostelWars() {
 
   return (
     <section
-      className="cinematic-scene section-spacer py-24 relative overflow-hidden"
+      className="cinematic-scene section-spacer"
       style={{
         paddingTop: '3rem',
         paddingBottom: '6rem',
         position: 'relative',
         zIndex: 10,
         backgroundColor: '#040507',
+        overflow: 'visible',
       }}
       id="leaderboard"
     >
@@ -102,7 +103,7 @@ export default function HostelWars() {
         }}
       />
 
-      <div className="container relative z-10" style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
         
         {/* Title */}
         <SectionTitle
@@ -162,7 +163,11 @@ export default function HostelWars() {
           blurAmount="1px"
           unfocusedOpacity={0.65}
           unfocusedScale={0.98}
-          gridClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '1.5rem',
+            width: '100%',
+          }}
         >
           {housesList.map((house, rankIndex) => {
             const isLeader = rankIndex === 0;

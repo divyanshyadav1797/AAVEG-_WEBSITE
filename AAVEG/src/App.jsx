@@ -21,13 +21,23 @@ export default function App() {
   useLenis();
 
   return (
-    <div className="aaveg-app-root relative bg-[#040507] text-[#EDE8E1] min-h-screen w-full overflow-x-clip">
+    <div
+      className="aaveg-app-root"
+      style={{
+        position: 'relative',
+        backgroundColor: '#040507',
+        color: '#EDE8E1',
+        minHeight: '100vh',
+        width: '100%',
+        overflowX: 'clip',
+      }}
+    >
       <ScrollToTop />
       {/* Fixed Header with college logo, anchors, sound toggle & Select House CTA */}
       <Header />
 
       {/* Main Experience Router */}
-      <main className="w-full">
+      <main style={{ width: '100%' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/houses" element={<HouseSelection />} />

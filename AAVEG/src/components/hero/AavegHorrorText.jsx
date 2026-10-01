@@ -17,7 +17,7 @@ export default function AavegHorrorText() {
         alignItems: 'center',
         margin: '0.25rem 0 0.85rem 0',
         width: '100%',
-        maxWidth: 'clamp(340px, 92vw, 1040px)',
+        maxWidth: 'min(94vw, 1040px)',
       }}
     >
       {/* Sinister Blood-Red & Ember Backlight Glow behind artwork */}

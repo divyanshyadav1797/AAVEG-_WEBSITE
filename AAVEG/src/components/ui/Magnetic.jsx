@@ -15,7 +15,7 @@ export default function Magnetic({
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
-    if (disabled || !ref.current) return;
+    if (disabled || !ref.current || !window.matchMedia('(hover: hover)').matches) return;
     const { clientX, clientY } = e;
     const { top, left, width, height } = ref.current.getBoundingClientRect();
     const centerX = left + width / 2;

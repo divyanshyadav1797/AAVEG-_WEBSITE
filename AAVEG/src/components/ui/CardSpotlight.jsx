@@ -25,13 +25,14 @@ export default function CardSpotlight({
     const y = e.clientY - rect.top;
     setMousePosition({ x, y });
 
-    if (tilt) {
+    if (tilt && window.matchMedia('(hover: hover)').matches) {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * -6; // max 6 deg
-      const rotateY = ((x - centerX) / centerX) * 6; // max 6 deg
+      const rotateX = ((y - centerY) / centerY) * -5; // max 5 deg
+      const rotateY = ((x - centerX) / centerX) * 5; // max 5 deg
       setTiltStyle({
         transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`,
+        willChange: 'transform',
       });
     }
   };

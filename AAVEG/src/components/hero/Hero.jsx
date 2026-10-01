@@ -31,11 +31,8 @@ export default function Hero({ onOpenTeaser }) {
       {/* Aceternity UI - Sweeping Theatrical Horror Spotlight */}
       <Spotlight fill="#FF3B00" opacity={0.28} />
 
-      {/* Aceternity UI - Stardust & Fiery Ember Particles */}
-      <SparklesCore particleColor="#FF4D00" particleDensity={45} minSize={0.8} maxSize={2.6} />
-
       {/* Aceternity UI - Shooting Ember Meteors */}
-      <Meteors number={10} color="#FF7A32" />
+      <Meteors number={8} color="#FF7A32" />
 
       {/* Cinematic Horror Atmospheric Background (Moon, Clouds, Gothic Monolith silhouette, Fog, Bats, Embers) */}
       <HeroBackground />
@@ -58,15 +55,18 @@ export default function Hero({ onOpenTeaser }) {
         <div
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(0.78rem, 1.4vw, 0.95rem)',
+            fontSize: 'clamp(0.72rem, 1.4vw, 0.92rem)',
             fontWeight: '700',
-            letterSpacing: '0.28em',
+            letterSpacing: 'clamp(0.12em, 1.8vw, 0.25em)',
             textTransform: 'uppercase',
             color: 'var(--text-secondary)',
             marginBottom: '0.45rem',
             display: 'inline-flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
             alignItems: 'center',
-            gap: '12px',
+            gap: '8px',
+            maxWidth: '100%',
           }}
         >
           <span style={{ fontWeight: '800' }}>
@@ -74,7 +74,7 @@ export default function Hero({ onOpenTeaser }) {
               THE HAUNTED HOSTEL FESTIVAL 2026
             </ShinyText>
           </span>
-          <span style={{ opacity: 0.4 }}>•</span>
+          <span style={{ opacity: 0.4 }} className="desktop-only">•</span>
           <span style={{ color: '#D6CFC7' }}>
             <GlitchText text="STEP INTO THE MADNESS" speed={35} maxIterations={6} />
           </span>

@@ -13,14 +13,14 @@ import GridBackground from '../components/ui/GridBackground';
 export default function HouseSelection() {
   return (
     <div
-      className="house-selection-page relative min-h-screen w-full"
+      className="house-selection-page"
       style={{
         paddingTop: 'calc(var(--header-height) + 2rem)',
         paddingBottom: '5rem',
         backgroundColor: '#040507',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
       {/* Aceternity UI - Theatrical Corner Spotlight */}

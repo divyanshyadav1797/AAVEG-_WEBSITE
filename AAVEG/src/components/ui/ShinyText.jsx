@@ -6,6 +6,7 @@ import React from 'react';
  */
 export default function ShinyText({
   children,
+  text,
   disabled = false,
   speed = 4,
   className = '',
@@ -13,6 +14,8 @@ export default function ShinyText({
   shimmerColor = '#FF8A3D',
   style = {},
 }) {
+  const content = children !== undefined ? children : text;
+
   return (
     <span
       className={`shiny-text inline-block ${className}`}
@@ -29,7 +32,7 @@ export default function ShinyText({
         ...style,
       }}
     >
-      {children}
+      {content}
     </span>
   );
 }
