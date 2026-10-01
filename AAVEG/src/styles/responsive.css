@@ -1,0 +1,88 @@
+/* Responsive Layout & Device Adaptations */
+
+/* Container utility */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Flex & Grid Utilities */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Large Screens (1440px+) */
+@media (min-width: 1440px) {
+  :root {
+    --header-height: 90px;
+  }
+}
+
+/* Laptops & Standard Desktops (1024px - 1439px) */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  :root {
+    --header-height: 80px;
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 74px;
+    --container-padding: 1.5rem;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .custom-cursor-element {
+    display: none !important;
+  }
+}
+
+/* Mobile Devices (< 768px) */
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+    --container-padding: 1.15rem;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .custom-cursor-element {
+    display: none !important;
+  }
+
+  /* Title adjustment */
+  .horror-title-distressed {
+    letter-spacing: 0.04em;
+  }
+
+  /* Responsive spacing */
+  .section-spacer {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+/* Small Mobile (< 420px) */
+@media (max-width: 419px) {
+  :root {
+    --container-padding: 0.85rem;
+  }
+}

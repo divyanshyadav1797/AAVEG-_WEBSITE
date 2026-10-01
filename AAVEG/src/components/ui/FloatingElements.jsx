@@ -1,0 +1,31 @@
+import React from 'react';
+
+/**
+ * Annnimate - FloatingElements Component
+ * Applies continuous harmonic floating oscillation with subtle tilt for atmospheric elements.
+ */
+export default function FloatingElements({
+  children,
+  duration = 4,
+  distance = 12,
+  rotate = 2,
+  delay = 0,
+  className = '',
+  style = {},
+}) {
+  return (
+    <div
+      className={`floating-element ${className}`}
+      style={{
+        display: 'inline-block',
+        animation: `floatHarmonic ${duration}s ease-in-out infinite alternate`,
+        animationDelay: `${delay}s`,
+        '--float-dist': `${distance}px`,
+        '--float-rot': `${rotate}deg`,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}

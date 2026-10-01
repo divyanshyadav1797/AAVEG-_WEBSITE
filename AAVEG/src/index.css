@@ -1,0 +1,15 @@
+@import './styles/variables.css';
+@import './styles/animations.css';
+@import './styles/globals.css';
+@import './styles/responsive.css';
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}

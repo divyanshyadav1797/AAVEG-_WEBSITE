@@ -1,0 +1,263 @@
+/* Keyframe Animations for Atmospheric Motion (Hardware Accelerated) */
+
+@keyframes moonGlow {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes cloudDriftLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes cloudDriftRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fogDriftSlow {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(30px, -10px, 0);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+}
+
+@keyframes batFlap {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-8px) scaleY(0.65);
+  }
+}
+
+@keyframes batFlyAcross {
+  0% {
+    transform: translate3d(-10vw, 40vh, 0) scale(0.6) rotate(-15deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(50vw, 15vh, 0) scale(1.1) rotate(5deg);
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(110vw, -10vh, 0) scale(0.7) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pumpkinFlicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.82;
+    transform: scale(0.98);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  70% {
+    opacity: 0.88;
+    transform: scale(0.99);
+  }
+}
+
+@keyframes windowFlicker {
+  0%, 100% {
+    opacity: 0.95;
+  }
+  30% {
+    opacity: 0.72;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.62;
+  }
+}
+
+
+@keyframes emberRise {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-20vh) translateX(calc(sin(1) * 60px)) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes horrorGlitch {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(20% 0 35% 0);
+    transform: translate(-3px, 1px);
+  }
+  40% {
+    clip-path: inset(60% 0 15% 0);
+    transform: translate(3px, -2px);
+  }
+  60% {
+    clip-path: inset(40% 0 45% 0);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    clip-path: inset(10% 0 75% 0);
+    transform: translate(2px, -1px);
+  }
+}
+
+@keyframes liquidBorderShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.25), inset 0 0 15px rgba(255, 77, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 77, 0, 0.5), inset 0 0 25px rgba(255, 77, 0, 0.3);
+  }
+}
+
+@keyframes radarSweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Aceternity UI Keyframes */
+@keyframes meteorFall {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-600px);
+    opacity: 0;
+  }
+}
+
+@keyframes spinBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spotlightSweep {
+  0% {
+    opacity: 0.15;
+    transform: translate(-10%, -10%) scale(0.95);
+  }
+  50% {
+    opacity: 0.32;
+    transform: translate(5%, 0%) scale(1.05);
+  }
+  100% {
+    opacity: 0.18;
+    transform: translate(-5%, 5%) scale(1);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 77, 0, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 35px rgba(255, 77, 0, 0.85));
+  }
+}
+
+@keyframes floatHarmonic {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(calc(-1 * var(--float-dist, 12px))) rotate(var(--float-rot, 2deg));
+  }
+  100% {
+    transform: translateY(var(--float-dist, 12px)) rotate(calc(-1 * var(--float-rot, 2deg)));
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+
+

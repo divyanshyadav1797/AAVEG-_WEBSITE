@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@samasante/liquid-glass": "^0.1.1",
+    "animejs": "^4.5.0"
+  }
+}

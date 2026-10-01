@@ -1,0 +1,275 @@
+@import './variables.css';
+@import './animations.css';
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Nosifer&family=Creepster&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  scroll-behavior: auto; /* Handled smoothly by Lenis & Anime.js */
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 59, 0, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(201, 47, 21, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 80%, rgba(255, 90, 20, 0.04) 0%, transparent 50%),
+    linear-gradient(180deg, #050505 0%, #08090B 50%, #050505 100%);
+  color: var(--text-primary);
+  overflow-x: clip;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060708;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-blood) 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-bright);
+  box-shadow: 0 0 16px rgba(255, 90, 20, 0.9);
+}
+
+/* Text Selection */
+::selection {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Typography Classes */
+.font-horror {
+  font-family: var(--font-horror);
+}
+
+.font-cinematic {
+  font-family: var(--font-cinematic);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Ultra-Visible Horror Title Treatment matching the reference poster */
+/* Ultra-Spooky Distressed Horror Title Treatment matching the reference poster */
+.horror-title-master {
+  font-family: 'Creepster', 'Nosifer', cursive, serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  position: relative;
+  line-height: 0.85;
+  user-select: none;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 60px rgba(255, 59, 0, 0.65));
+}
+
+.horror-title-white {
+  color: #F6F2EB;
+  text-shadow: 
+    -4px -4px 0 #000,
+     4px -4px 0 #000,
+    -4px  4px 0 #000,
+     4px  4px 0 #000,
+    -6px 0 0 #000,
+     6px 0 0 #000,
+     0 -6px 0 #000,
+     0  6px 0 #000,
+     0 8px 18px rgba(0, 0, 0, 0.95),
+     0 0 35px rgba(255, 230, 200, 0.9),
+     0 0 75px rgba(255, 77, 0, 0.45);
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s ease;
+}
+
+.horror-title-white:hover {
+  transform: rotate(-2.5deg) scale(1.02);
+}
+
+.horror-title-red {
+  color: #FF3B00;
+  text-shadow: 
+    -4px -4px 0 #000,
+     4px -4px 0 #000,
+    -4px  4px 0 #000,
+     4px  4px 0 #000,
+    -6px 0 0 #000,
+     6px 0 0 #000,
+     0 -6px 0 #000,
+     0  6px 0 #000,
+     0 0 35px #FF3B00,
+     0 0 70px #FF5A14,
+     0 0 110px rgba(201, 47, 21, 0.95);
+  display: inline-block;
+  transform: rotate(1.5deg);
+  transition: transform 0.3s ease;
+}
+
+.horror-title-red:hover {
+  transform: rotate(2.5deg) scale(1.02);
+}
+
+.horror-text-glow {
+  text-shadow: 0 0 15px rgba(255, 77, 0, 0.7), 0 0 35px rgba(255, 45, 0, 0.4);
+}
+
+.horror-subheading {
+  font-family: var(--font-display);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Performant Film-grain Noise Overlay (CPU-friendly) */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* Cinematic Vignette */
+.cinematic-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: radial-gradient(circle at center, transparent 45%, rgba(3, 4, 5, 0.82) 98%);
+}
+
+/* Liquid Glass Cards & Surfaces */
+.liquid-glass-panel {
+  position: relative;
+  background: rgba(14, 16, 18, 0.65);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 77, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(255, 59, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 77, 0, 0.2);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.liquid-glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 120, 40, 0.08) 45%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 120, 40, 0.08) 55%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+
+.liquid-glass-panel:hover::before {
+  transform: skewX(-20deg) translateX(70%);
+}
+
+.liquid-glass-panel:hover {
+  border-color: rgba(255, 90, 20, 0.65);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(255, 77, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(255, 90, 20, 0.4);
+  transform: translateY(-4px);
+}
+
+/* Film Frame Edge Effects */
+.film-frame {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.film-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Links & Buttons Reset */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
