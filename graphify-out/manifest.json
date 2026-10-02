@@ -1,0 +1,572 @@
+{
+  "eslint.config.js": {
+    "mtime": 1790864537.0619824,
+    "seen": 1790917496.5850904,
+    "ast_hash": "3aa4b57d7f08181d86bde52a4dcb7f22",
+    "semantic_hash": "3aa4b57d7f08181d86bde52a4dcb7f22"
+  },
+  "package.json": {
+    "mtime": 1790878085.5379055,
+    "seen": 1790917496.5850954,
+    "ast_hash": "39f21889e3fa0956e9c8a6c72a535665",
+    "semantic_hash": "39f21889e3fa0956e9c8a6c72a535665"
+  },
+  "src/App.jsx": {
+    "mtime": 1790881731.476846,
+    "seen": 1790917496.5850978,
+    "ast_hash": "057b851722e3f7117ae66710d41bda55",
+    "semantic_hash": "057b851722e3f7117ae66710d41bda55"
+  },
+  "src/components/common/Button.jsx": {
+    "mtime": 1790869267.106361,
+    "seen": 1790917496.585099,
+    "ast_hash": "592d2382368935c81dbae8ae958a0353",
+    "semantic_hash": "592d2382368935c81dbae8ae958a0353"
+  },
+  "src/components/common/GlassContainer.jsx": {
+    "mtime": 1790868243.8708105,
+    "seen": 1790917496.5851,
+    "ast_hash": "9aaf1977e97677c3bfbca62121a87ab4",
+    "semantic_hash": "9aaf1977e97677c3bfbca62121a87ab4"
+  },
+  "src/components/common/SectionTitle.jsx": {
+    "mtime": 1790879274.0261877,
+    "seen": 1790917496.5851011,
+    "ast_hash": "65f3fb2c43152f5527afb87e18bc723a",
+    "semantic_hash": "65f3fb2c43152f5527afb87e18bc723a"
+  },
+  "src/components/common/SocialIcons.jsx": {
+    "mtime": 1790866060.5098095,
+    "seen": 1790917496.585102,
+    "ast_hash": "30823ddf9f197694768a0709e63167b7",
+    "semantic_hash": "30823ddf9f197694768a0709e63167b7"
+  },
+  "src/components/common/SoundToggle.jsx": {
+    "mtime": 1790865613.9202845,
+    "seen": 1790917496.585103,
+    "ast_hash": "5d9bd710bb1c5368083d7842bd3b3d6b",
+    "semantic_hash": "5d9bd710bb1c5368083d7842bd3b3d6b"
+  },
+  "src/components/hero/AavegHorrorText.jsx": {
+    "mtime": 1790881033.600793,
+    "seen": 1790917496.5851042,
+    "ast_hash": "637bf8f0d3201bdc147023304ef6cddb",
+    "semantic_hash": "637bf8f0d3201bdc147023304ef6cddb"
+  },
+  "src/components/hero/Bats.jsx": {
+    "mtime": 1790865735.7903318,
+    "seen": 1790917496.5851052,
+    "ast_hash": "b6d9c2de28a67ce1b7007b8fa1ce6ffc",
+    "semantic_hash": "b6d9c2de28a67ce1b7007b8fa1ce6ffc"
+  },
+  "src/components/hero/Clouds.jsx": {
+    "mtime": 1790865723.9452472,
+    "seen": 1790917496.5851061,
+    "ast_hash": "a629ae639993719fea0870a26e94adf1",
+    "semantic_hash": "a629ae639993719fea0870a26e94adf1"
+  },
+  "src/components/hero/FloatingParticles.jsx": {
+    "mtime": 1790867028.934186,
+    "seen": 1790917496.5851076,
+    "ast_hash": "8574dabc1a9fd3bafdd8b72e376f8ec8",
+    "semantic_hash": "8574dabc1a9fd3bafdd8b72e376f8ec8"
+  },
+  "src/components/hero/Fog.jsx": {
+    "mtime": 1790865746.3190806,
+    "seen": 1790917496.5851085,
+    "ast_hash": "5ff3df82b129f823ab6abf52a27824f9",
+    "semantic_hash": "5ff3df82b129f823ab6abf52a27824f9"
+  },
+  "src/components/hero/HauntedEnvironment.jsx": {
+    "mtime": 1790870964.6488678,
+    "seen": 1790917496.5851097,
+    "ast_hash": "7ccc69936925a0f35622b1667fde0c6f",
+    "semantic_hash": "7ccc69936925a0f35622b1667fde0c6f"
+  },
+  "src/components/hero/Hero.jsx": {
+    "mtime": 1790881047.2974434,
+    "seen": 1790917496.5851104,
+    "ast_hash": "adbd6e01ca39641872d311f793f44ff0",
+    "semantic_hash": "adbd6e01ca39641872d311f793f44ff0"
+  },
+  "src/components/hero/HeroBackground.jsx": {
+    "mtime": 1790870973.3531778,
+    "seen": 1790917496.5851116,
+    "ast_hash": "55a6ac350209883621aa3ba6f12d182f",
+    "semantic_hash": "55a6ac350209883621aa3ba6f12d182f"
+  },
+  "src/components/hero/Moon.jsx": {
+    "mtime": 1790869267.1535604,
+    "seen": 1790917496.5851126,
+    "ast_hash": "30b0229b4e8f68e2f560168edc7fab7b",
+    "semantic_hash": "30b0229b4e8f68e2f560168edc7fab7b"
+  },
+  "src/components/hero/Pumpkin.jsx": {
+    "mtime": 1790865757.0733654,
+    "seen": 1790917496.5851133,
+    "ast_hash": "c640917994f8a139f740296ce73e485f",
+    "semantic_hash": "c640917994f8a139f740296ce73e485f"
+  },
+  "src/components/home/FeatureCard.jsx": {
+    "mtime": 1790869267.1339853,
+    "seen": 1790917496.585114,
+    "ast_hash": "5bff718bcaaf8ef652e0fadd04e76950",
+    "semantic_hash": "5bff718bcaaf8ef652e0fadd04e76950"
+  },
+  "src/components/home/FeatureCards.jsx": {
+    "mtime": 1790881907.878695,
+    "seen": 1790917496.5851152,
+    "ast_hash": "c3acd847d28be99427ceaf01535ca3b7",
+    "semantic_hash": "c3acd847d28be99427ceaf01535ca3b7"
+  },
+  "src/components/home/FestivalMovieJourney.jsx": {
+    "mtime": 1790878918.5960963,
+    "seen": 1790917496.5851161,
+    "ast_hash": "8dc9dcf146790333b278793d09f49322",
+    "semantic_hash": "8dc9dcf146790333b278793d09f49322"
+  },
+  "src/components/home/FestivalTeaser.jsx": {
+    "mtime": 1790865883.80205,
+    "seen": 1790917496.5851169,
+    "ast_hash": "ff66bd31ca4d552d5f5d221ec7702129",
+    "semantic_hash": "ff66bd31ca4d552d5f5d221ec7702129"
+  },
+  "src/components/home/FinalCTA.jsx": {
+    "mtime": 1790869267.1138384,
+    "seen": 1790917496.5851185,
+    "ast_hash": "a067870cc9957def9b7c6defcc3f3b77",
+    "semantic_hash": "a067870cc9957def9b7c6defcc3f3b77"
+  },
+  "src/components/home/HostelWars.jsx": {
+    "mtime": 1790881699.2553988,
+    "seen": 1790917496.5851192,
+    "ast_hash": "cd97fb13a19c67fea7f2072da578ffe5",
+    "semantic_hash": "cd97fb13a19c67fea7f2072da578ffe5"
+  },
+  "src/components/houses/CircularHouseSelector.jsx": {
+    "mtime": 1790881066.1408935,
+    "seen": 1790917496.58512,
+    "ast_hash": "eff16b2ff14baf3e87c8d5079a95db14",
+    "semantic_hash": "eff16b2ff14baf3e87c8d5079a95db14"
+  },
+  "src/components/layout/Footer.jsx": {
+    "mtime": 1790879257.918,
+    "seen": 1790917496.585121,
+    "ast_hash": "8e50108125c6c8bb4e72765e86562ac9",
+    "semantic_hash": "8e50108125c6c8bb4e72765e86562ac9"
+  },
+  "src/components/layout/Header.jsx": {
+    "mtime": 1790881818.803873,
+    "seen": 1790917496.5851219,
+    "ast_hash": "f30d3932d5283946981717a08c67c958",
+    "semantic_hash": "f30d3932d5283946981717a08c67c958"
+  },
+  "src/components/layout/MobileMenu.jsx": {
+    "mtime": 1790871061.8022957,
+    "seen": 1790917496.5851226,
+    "ast_hash": "1f2a8fcdd60a6a9e71604e8b6052454b",
+    "semantic_hash": "1f2a8fcdd60a6a9e71604e8b6052454b"
+  },
+  "src/components/ui/BackgroundBeams.jsx": {
+    "mtime": 1790878157.088328,
+    "seen": 1790917496.5851235,
+    "ast_hash": "3223d39b9ae7bc7338ec02e1d0aac376",
+    "semantic_hash": "3223d39b9ae7bc7338ec02e1d0aac376"
+  },
+  "src/components/ui/CardSpotlight.jsx": {
+    "mtime": 1790880998.903221,
+    "seen": 1790917496.5851243,
+    "ast_hash": "fa0f5831cefef5046ff87bc34939ae30",
+    "semantic_hash": "fa0f5831cefef5046ff87bc34939ae30"
+  },
+  "src/components/ui/FloatingElements.jsx": {
+    "mtime": 1790878309.7716486,
+    "seen": 1790917496.5851252,
+    "ast_hash": "70dd2fe5f29905ba75da38469af8766d",
+    "semantic_hash": "70dd2fe5f29905ba75da38469af8766d"
+  },
+  "src/components/ui/FocusCards.jsx": {
+    "mtime": 1790881127.838582,
+    "seen": 1790917496.585126,
+    "ast_hash": "326986af28c607f5608615f285454934",
+    "semantic_hash": "326986af28c607f5608615f285454934"
+  },
+  "src/components/ui/GlitchText.jsx": {
+    "mtime": 1790878146.9198463,
+    "seen": 1790917496.5851266,
+    "ast_hash": "17137d5568ab69875043c07bf07ec536",
+    "semantic_hash": "17137d5568ab69875043c07bf07ec536"
+  },
+  "src/components/ui/GridBackground.jsx": {
+    "mtime": 1790878771.260542,
+    "seen": 1790917496.5851276,
+    "ast_hash": "a45a341155187fe6b2f6db05be3ab3ce",
+    "semantic_hash": "a45a341155187fe6b2f6db05be3ab3ce"
+  },
+  "src/components/ui/HoverBorderGradient.jsx": {
+    "mtime": 1790878763.611092,
+    "seen": 1790917496.5851283,
+    "ast_hash": "4885f90c62d955488aefed2a2f9f34cf",
+    "semantic_hash": "4885f90c62d955488aefed2a2f9f34cf"
+  },
+  "src/components/ui/Lamp.jsx": {
+    "mtime": 1790878288.3792224,
+    "seen": 1790917496.5851293,
+    "ast_hash": "1811cc83cd7d62a1c6782bf302989494",
+    "semantic_hash": "1811cc83cd7d62a1c6782bf302989494"
+  },
+  "src/components/ui/Magnetic.jsx": {
+    "mtime": 1790881005.7375145,
+    "seen": 1790917496.58513,
+    "ast_hash": "c9bd16b2ccf9cf75d721afbc2c16e389",
+    "semantic_hash": "c9bd16b2ccf9cf75d721afbc2c16e389"
+  },
+  "src/components/ui/Meteors.jsx": {
+    "mtime": 1790880992.3228354,
+    "seen": 1790917496.5851307,
+    "ast_hash": "ff5ea71c98614fef3b3fd07130bcc4f8",
+    "semantic_hash": "ff5ea71c98614fef3b3fd07130bcc4f8"
+  },
+  "src/components/ui/MovingBorder.jsx": {
+    "mtime": 1790878331.8088434,
+    "seen": 1790917496.5851314,
+    "ast_hash": "33ec68435c63e8371ea6868c462ed6e3",
+    "semantic_hash": "33ec68435c63e8371ea6868c462ed6e3"
+  },
+  "src/components/ui/ShinyText.jsx": {
+    "mtime": 1790880860.1648495,
+    "seen": 1790917496.5851324,
+    "ast_hash": "b8d70d3f2fe1437d3f08d44277415da0",
+    "semantic_hash": "b8d70d3f2fe1437d3f08d44277415da0"
+  },
+  "src/components/ui/SparklesCore.jsx": {
+    "mtime": 1790880980.478296,
+    "seen": 1790917496.5851333,
+    "ast_hash": "a292d370303c09fc5e5b14de9c145fdd",
+    "semantic_hash": "a292d370303c09fc5e5b14de9c145fdd"
+  },
+  "src/components/ui/Spotlight.jsx": {
+    "mtime": 1790878096.2456577,
+    "seen": 1790917496.585134,
+    "ast_hash": "0d0c593324c201423f34dc51af19bbf1",
+    "semantic_hash": "0d0c593324c201423f34dc51af19bbf1"
+  },
+  "src/components/ui/TextGenerateEffect.jsx": {
+    "mtime": 1790878296.3798387,
+    "seen": 1790917496.5851347,
+    "ast_hash": "192b0d00dff45775961fcc8c85325f5f",
+    "semantic_hash": "192b0d00dff45775961fcc8c85325f5f"
+  },
+  "src/data/config.js": {
+    "mtime": 1790867037.1107388,
+    "seen": 1790917496.5851364,
+    "ast_hash": "12333ba863e5b5f8daadd45528b05a02",
+    "semantic_hash": "12333ba863e5b5f8daadd45528b05a02"
+  },
+  "src/data/hostels.js": {
+    "mtime": 1790865332.219076,
+    "seen": 1790917496.5851374,
+    "ast_hash": "834667bc357bf554f04d66861dfeedf9",
+    "semantic_hash": "834667bc357bf554f04d66861dfeedf9"
+  },
+  "src/data/navigation.js": {
+    "mtime": 1790871021.3155608,
+    "seen": 1790917496.585138,
+    "ast_hash": "2b407dbb35b6a4a08c716a0a2fc56faf",
+    "semantic_hash": "2b407dbb35b6a4a08c716a0a2fc56faf"
+  },
+  "src/data/registration.js": {
+    "mtime": 1790870793.3335953,
+    "seen": 1790917496.5851393,
+    "ast_hash": "62e77dbdaf8247225a9a8a9cd6da3993",
+    "semantic_hash": "62e77dbdaf8247225a9a8a9cd6da3993"
+  },
+  "src/hooks/useLenis.js": {
+    "mtime": 1790868671.7434657,
+    "seen": 1790917496.58514,
+    "ast_hash": "a418c32e35b504dacac84db4e465deb9",
+    "semantic_hash": "a418c32e35b504dacac84db4e465deb9"
+  },
+  "src/hooks/useMediaQuery.js": {
+    "mtime": 1790865414.7728844,
+    "seen": 1790917496.585141,
+    "ast_hash": "bdc25afef6829f659cf23f20527f4b89",
+    "semantic_hash": "bdc25afef6829f659cf23f20527f4b89"
+  },
+  "src/hooks/useReducedMotion.js": {
+    "mtime": 1790865406.928393,
+    "seen": 1790917496.585142,
+    "ast_hash": "1b20cf065d0aa0601bc6be04ae4259ae",
+    "semantic_hash": "1b20cf065d0aa0601bc6be04ae4259ae"
+  },
+  "src/main.jsx": {
+    "mtime": 1790868312.88701,
+    "seen": 1790917496.5851429,
+    "ast_hash": "1f7ac3c192f9a3b55f5defea1d101a4a",
+    "semantic_hash": "1f7ac3c192f9a3b55f5defea1d101a4a"
+  },
+  "src/pages/Home.jsx": {
+    "mtime": 1790870875.8521507,
+    "seen": 1790917496.5851436,
+    "ast_hash": "785826325d7f6bf9c731f1a2c7fd9421",
+    "semantic_hash": "785826325d7f6bf9c731f1a2c7fd9421"
+  },
+  "src/pages/HouseActivities.jsx": {
+    "mtime": 1790881865.6933212,
+    "seen": 1790917496.5851445,
+    "ast_hash": "242bc2d0ab551fe549ef8b1a35eeae8f",
+    "semantic_hash": "242bc2d0ab551fe549ef8b1a35eeae8f"
+  },
+  "src/pages/HouseSelection.jsx": {
+    "mtime": 1790881856.6441743,
+    "seen": 1790917496.5851452,
+    "ast_hash": "3432516de3d6d8926ce2fde20da0f924",
+    "semantic_hash": "3432516de3d6d8926ce2fde20da0f924"
+  },
+  "src/pages/LeaderboardPage.jsx": {
+    "mtime": 1790881711.73317,
+    "seen": 1790917496.5851462,
+    "ast_hash": "cd38ebad4f7e9b637428699164245848",
+    "semantic_hash": "cd38ebad4f7e9b637428699164245848"
+  },
+  "src/utils/device.js": {
+    "mtime": 1790865373.996791,
+    "seen": 1790917496.585147,
+    "ast_hash": "084faed943cca26edc6af26cb3365f26",
+    "semantic_hash": "084faed943cca26edc6af26cb3365f26"
+  },
+  "src/utils/performance.js": {
+    "mtime": 1790865380.6109338,
+    "seen": 1790917496.5851479,
+    "ast_hash": "2b0199862bf70d9776283040492ee6d7",
+    "semantic_hash": "2b0199862bf70d9776283040492ee6d7"
+  },
+  "src/utils/sound.js": {
+    "mtime": 1790865390.7570043,
+    "seen": 1790917496.5851488,
+    "ast_hash": "ed2dfea671c7c5c2bd33bcf4b0580b9e",
+    "semantic_hash": "ed2dfea671c7c5c2bd33bcf4b0580b9e"
+  },
+  "vite.config.js": {
+    "mtime": 1789501067.8062525,
+    "seen": 1790917496.5851495,
+    "ast_hash": "5d54447744c19ccd28638a5c668d15ea",
+    "semantic_hash": "5d54447744c19ccd28638a5c668d15ea"
+  },
+  "README.md": {
+    "mtime": 1790864537.0777535,
+    "seen": 1790917496.5851505,
+    "ast_hash": "a28dc4cb878325f3e9e5649f3e1469ac",
+    "semantic_hash": "a28dc4cb878325f3e9e5649f3e1469ac"
+  },
+  "index.html": {
+    "mtime": 1790866733.8669794,
+    "seen": 1790917496.5851514,
+    "ast_hash": "0cf64460c8c0c9729053ce3fb5997029",
+    "semantic_hash": "0cf64460c8c0c9729053ce3fb5997029"
+  },
+  "public/assets/images/aaveg-games.jpg": {
+    "mtime": 1790862401.0166838,
+    "seen": 1790917496.5851521,
+    "ast_hash": "ffce7359021d701350c3ccb0f2bddc16",
+    "semantic_hash": "ffce7359021d701350c3ccb0f2bddc16"
+  },
+  "public/assets/images/cinematic/abandoned-hostel-monolith.jpg": {
+    "mtime": 1790868769.7858613,
+    "seen": 1790917496.5851533,
+    "ast_hash": "15348ad1641330e2387e431bdfd34783",
+    "semantic_hash": "15348ad1641330e2387e431bdfd34783"
+  },
+  "public/assets/images/cinematic/hostel-corridor-interior.jpg": {
+    "mtime": 1790868794.5090892,
+    "seen": 1790917496.585154,
+    "ast_hash": "b2dee761f529c973448111fe6f72715e",
+    "semantic_hash": "b2dee761f529c973448111fe6f72715e"
+  },
+  "public/assets/images/events-wheel.jpg": {
+    "mtime": 1790862369.606111,
+    "seen": 1790917496.5851548,
+    "ast_hash": "5e8d68aad0963b5ad5b658d1e659a430",
+    "semantic_hash": "5e8d68aad0963b5ad5b658d1e659a430"
+  },
+  "public/assets/images/full-flow-reference.jpg": {
+    "mtime": 1790862419.6538038,
+    "seen": 1790917496.5851555,
+    "ast_hash": "3712bfbf98ee3793d449fb26464419b6",
+    "semantic_hash": "3712bfbf98ee3793d449fb26464419b6"
+  },
+  "public/assets/images/hero-reference.jpg": {
+    "mtime": 1790862365.0944397,
+    "seen": 1790917496.5851603,
+    "ast_hash": "080ab21536b79d906408e3a8577b0699",
+    "semantic_hash": "080ab21536b79d906408e3a8577b0699"
+  },
+  "public/assets/images/hostel-leaderboard.jpg": {
+    "mtime": 1790862390.5909867,
+    "seen": 1790917496.5851612,
+    "ast_hash": "b7ff04b78b5af91bd8973ddb2d11d520",
+    "semantic_hash": "b7ff04b78b5af91bd8973ddb2d11d520"
+  },
+  "public/assets/images/hostel-portals.jpg": {
+    "mtime": 1790862411.5597956,
+    "seen": 1790917496.585162,
+    "ast_hash": "c4d4c5d0c837d75cd004a949b05c07fe",
+    "semantic_hash": "c4d4c5d0c837d75cd004a949b05c07fe"
+  },
+  "public/assets/logos/college-logo.png": {
+    "mtime": 1790865238.0527856,
+    "seen": 1790917496.5851626,
+    "ast_hash": "00db1c5e29eb892d76451631f64a99f6",
+    "semantic_hash": "00db1c5e29eb892d76451631f64a99f6"
+  },
+  "public/favicon.svg": {
+    "mtime": 1789501067.795458,
+    "seen": 1790917496.5851636,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "public/icons.svg": {
+    "mtime": 1789501067.797452,
+    "seen": 1790917496.5851645,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "src/assets/hero.png": {
+    "mtime": 1789501067.801461,
+    "seen": 1790917496.5851653,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.38 PM.jpeg": {
+    "mtime": 1790862365.0944397,
+    "seen": 1790917496.585166,
+    "ast_hash": "080ab21536b79d906408e3a8577b0699",
+    "semantic_hash": "080ab21536b79d906408e3a8577b0699"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.39 PM.jpeg": {
+    "mtime": 1790862369.606111,
+    "seen": 1790917496.5851672,
+    "ast_hash": "5e8d68aad0963b5ad5b658d1e659a430",
+    "semantic_hash": "5e8d68aad0963b5ad5b658d1e659a430"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.40 PM.jpeg": {
+    "mtime": 1790862390.5909867,
+    "seen": 1790917496.585168,
+    "ast_hash": "b7ff04b78b5af91bd8973ddb2d11d520",
+    "semantic_hash": "b7ff04b78b5af91bd8973ddb2d11d520"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.470PM.jpeg": {
+    "mtime": 1790862419.6538038,
+    "seen": 1790917496.5851686,
+    "ast_hash": "3712bfbf98ee3793d449fb26464419b6",
+    "semantic_hash": "3712bfbf98ee3793d449fb26464419b6"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.50 PM.jpeg": {
+    "mtime": 1790862401.0166838,
+    "seen": 1790917496.5851696,
+    "ast_hash": "ffce7359021d701350c3ccb0f2bddc16",
+    "semantic_hash": "ffce7359021d701350c3ccb0f2bddc16"
+  },
+  "src/assets/images/WhatsApp Image 2026-09-28 at 1.30.60 PM.jpeg": {
+    "mtime": 1790862411.5597956,
+    "seen": 1790917496.5851705,
+    "ast_hash": "c4d4c5d0c837d75cd004a949b05c07fe",
+    "semantic_hash": "c4d4c5d0c837d75cd004a949b05c07fe"
+  },
+  "src/assets/images/events/aaveg-games.jpg": {
+    "mtime": 1790862401.0166838,
+    "seen": 1790917496.5851715,
+    "ast_hash": "ffce7359021d701350c3ccb0f2bddc16",
+    "semantic_hash": "ffce7359021d701350c3ccb0f2bddc16"
+  },
+  "src/assets/images/events/events-wheel.jpg": {
+    "mtime": 1790862369.606111,
+    "seen": 1790917496.5851722,
+    "ast_hash": "5e8d68aad0963b5ad5b658d1e659a430",
+    "semantic_hash": "5e8d68aad0963b5ad5b658d1e659a430"
+  },
+  "src/assets/images/hero/aaveg-title-logo.png": {
+    "mtime": 1790872327.705639,
+    "seen": 1790917496.585173,
+    "ast_hash": "520a0e6d10511fd70da52a9a6d23fdae",
+    "semantic_hash": "520a0e6d10511fd70da52a9a6d23fdae"
+  },
+  "src/assets/images/hero/abandoned-hostel-monolith.jpg": {
+    "mtime": 1790868769.7858613,
+    "seen": 1790917496.585174,
+    "ast_hash": "15348ad1641330e2387e431bdfd34783",
+    "semantic_hash": "15348ad1641330e2387e431bdfd34783"
+  },
+  "src/assets/images/hero/full-flow-reference.jpg": {
+    "mtime": 1790862419.6538038,
+    "seen": 1790917496.5851748,
+    "ast_hash": "3712bfbf98ee3793d449fb26464419b6",
+    "semantic_hash": "3712bfbf98ee3793d449fb26464419b6"
+  },
+  "src/assets/images/hero/hero-reference.jpg": {
+    "mtime": 1790862365.0944397,
+    "seen": 1790917496.5851755,
+    "ast_hash": "080ab21536b79d906408e3a8577b0699",
+    "semantic_hash": "080ab21536b79d906408e3a8577b0699"
+  },
+  "src/assets/images/hero/hostel-corridor-interior.jpg": {
+    "mtime": 1790868794.5090892,
+    "seen": 1790917496.5851765,
+    "ast_hash": "b2dee761f529c973448111fe6f72715e",
+    "semantic_hash": "b2dee761f529c973448111fe6f72715e"
+  },
+  "src/assets/images/hero/hostel-leaderboard.jpg": {
+    "mtime": 1790862390.5909867,
+    "seen": 1790917496.5851789,
+    "ast_hash": "b7ff04b78b5af91bd8973ddb2d11d520",
+    "semantic_hash": "b7ff04b78b5af91bd8973ddb2d11d520"
+  },
+  "src/assets/images/hero/hostel-portals.jpg": {
+    "mtime": 1790862411.5597956,
+    "seen": 1790917496.5851798,
+    "ast_hash": "c4d4c5d0c837d75cd004a949b05c07fe",
+    "semantic_hash": "c4d4c5d0c837d75cd004a949b05c07fe"
+  },
+  "src/assets/logos/college-logo-orginal.png": {
+    "mtime": 1790879031.1523273,
+    "seen": 1790917496.585181,
+    "ast_hash": "acb9750701f7cb16649840f9984ee6ba",
+    "semantic_hash": "acb9750701f7cb16649840f9984ee6ba"
+  },
+  "src/assets/logos/college-logo.png": {
+    "mtime": 1790879249.0388303,
+    "seen": 1790917496.5851817,
+    "ast_hash": "6a47ccbf9fd60ef3e17e3ec800df93d7",
+    "semantic_hash": "6a47ccbf9fd60ef3e17e3ec800df93d7"
+  },
+  "src/assets/logos/temp-college-logo.png": {
+    "mtime": 1790865238.0492086,
+    "seen": 1790917496.5851827,
+    "ast_hash": "00db1c5e29eb892d76451631f64a99f6",
+    "semantic_hash": "00db1c5e29eb892d76451631f64a99f6"
+  },
+  "src/assets/react.svg": {
+    "mtime": 1789501067.8027542,
+    "seen": 1790917496.5851834,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "src/assets/vite.svg": {
+    "mtime": 1789501067.8040955,
+    "seen": 1790917496.5851843,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  },
+  "public/assets/videos/teaser.mp4": {
+    "mtime": 1790862357.2165587,
+    "seen": 1790917496.585185,
+    "ast_hash": "aad1ad1475db03b0b731de1009b1c383",
+    "semantic_hash": "aad1ad1475db03b0b731de1009b1c383"
+  },
+  "src/assets/videos/teaser.mp4": {
+    "mtime": 1790862357.2165587,
+    "seen": 1790917496.585186,
+    "ast_hash": "aad1ad1475db03b0b731de1009b1c383",
+    "semantic_hash": "aad1ad1475db03b0b731de1009b1c383"
+  }
+}

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
-import { Crown, Flame, Trophy, Clock, Sparkles, Shield, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Trophy, Crown, Flame, Clock, BarChart3, TrendingUp, Sparkles, Shield } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
 import Button from '../common/Button';
 import CardSpotlight from '../ui/CardSpotlight';
@@ -8,22 +7,20 @@ import BackgroundBeams from '../ui/BackgroundBeams';
 import Meteors from '../ui/Meteors';
 import MovingBorder from '../ui/MovingBorder';
 import Magnetic from '../ui/Magnetic';
-import GlitchText from '../ui/GlitchText';
 import ShinyText from '../ui/ShinyText';
-import FocusCards from '../ui/FocusCards';
-import FloatingElements from '../ui/FloatingElements';
 import GridBackground from '../ui/GridBackground';
 import { HOUSES } from '../../data/registration';
+import { HOUSE_POINTS } from '../../data/leaderboardData';
 
+/**
+ * HostelWars Leaderboard Component
+ * Features a high-precision battle points graph visualization.
+ * Points are configured directly in src/data/leaderboardData.js (or edited here).
+ * The Cheer system and Activity viewer have been removed as requested.
+ */
 export default function HostelWars() {
-  // Initialize with the 8 Houses and baseline battle points
-  const initialHouses = HOUSES.map((h, i) => ({
-    ...h,
-    points: 1250 - i * 90 + (i === 0 ? 120 : 0),
-  }));
-
-  const [housesList, setHousesList] = useState(initialHouses);
-  const [selectedHouseId, setSelectedHouseId] = useState('house-1');
+  const [selectedHouseId, setSelectedHouseId] = useState(null);
+  const [graphMode, setGraphMode] = useState('bars'); // 'bars' | 'podium'
   const [timeLeft, setTimeLeft] = useState({ days: 27, hours: 14, minutes: 20, seconds: 45 });
 
   // Countdown timer to October 28, 2026
@@ -50,26 +47,19 @@ export default function HostelWars() {
     return () => clearInterval(interval);
   }, []);
 
-  // Cheer / vote for house interaction
-  const handleCheer = (houseId, e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (rect.left + rect.width / 2) / window.innerWidth;
-    const y = (rect.top + rect.height / 2) / window.innerHeight;
+  // Compute sorted houses dynamically based on HOUSE_POINTS in src/data/leaderboardData.js
+  const sortedHouses = useMemo(() => {
+    return HOUSES.map((h) => ({
+      ...h,
+      points: HOUSE_POINTS[h.id] ?? 1000,
+    })).sort((a, b) => b.points - a.points);
+  }, []);
 
-    confetti({
-      particleCount: 25,
-      spread: 60,
-      origin: { x, y },
-      colors: ['#FF4D00', '#FFA04D', '#FFD166', '#FFFFFF'],
-      disableForReducedMotion: true,
-    });
+  const maxPoints = useMemo(() => {
+    return Math.max(...sortedHouses.map((h) => h.points), 100);
+  }, [sortedHouses]);
 
-    setHousesList((prev) => {
-      const updated = prev.map((h) => (h.id === houseId ? { ...h, points: h.points + 10 } : h));
-      // Sort dynamically descending by points
-      return [...updated].sort((a, b) => b.points - a.points);
-    });
-  };
+  const leaderHouse = sortedHouses[0];
 
   return (
     <section
@@ -84,33 +74,34 @@ export default function HostelWars() {
       }}
       id="leaderboard"
     >
-      {/* Aceternity UI - Volumetric Horror Beams, Grid & Falling Embers */}
+      {/* Volumetric Horror Beams, Grid & Falling Embers */}
       <GridBackground pattern="cross" color="rgba(255, 77, 0, 0.05)" mask="radial" />
       <BackgroundBeams color="#FF4D00" />
-      <Meteors number={14} color="#FF7A32" />
+      <Meteors number={12} color="#FF7A32" />
 
-      {/* Background ambient lighting */}
+      {/* Ambient background lighting */}
       <div
         style={{
           position: 'absolute',
-          top: '50%',
+          top: '30%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: '900px',
+          maxWidth: '100%',
           height: '450px',
-          background: 'radial-gradient(ellipse at center, rgba(255, 77, 0, 0.09) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(255, 77, 0, 0.1) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
 
-      <div className="container" style={{ position: 'relative', zIndex: 10, maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10, maxWidth: '1240px', margin: '0 auto', padding: '0 1.25rem' }}>
         
         {/* Title */}
         <SectionTitle
           tagline="THE ROYAL CLASH"
           title="EIGHT HOUSES • ONE CROWN"
           highlightWord="CROWN"
-          subtitle="DIFFERENT ROOMS. ONE SPIRIT. WHO WILL RULE AAVEG 2026?"
+          subtitle="REAL-TIME BATTLE POINTS GRAPH & ARENA STANDINGS"
         />
 
         {/* Live Status & Countdown Banner */}
@@ -121,25 +112,25 @@ export default function HostelWars() {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1rem',
-            padding: '12px 24px',
+            padding: '14px 22px',
             borderRadius: '14px',
             background: 'rgba(18, 20, 24, 0.85)',
             border: '1px solid rgba(255, 77, 0, 0.3)',
             backdropFilter: 'blur(16px)',
-            marginBottom: '3rem',
+            marginBottom: '2.5rem',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Trophy size={18} style={{ color: 'var(--accent-bright)' }} />
             <span style={{ fontSize: '0.88rem', fontWeight: '700', color: 'var(--text-primary)' }}>
-              <ShinyText text="LIVE LEADERBOARD • REAL-TIME HOUSE STANDINGS" shimmerColor="#FF8533" />
+              <ShinyText text="BATTLE POINTS LEADERBOARD GRAPH" shimmerColor="#FF8533" />
             </span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <Clock size={16} style={{ color: 'var(--accent-glow)' }} />
             <span style={{ fontSize: '0.82rem', letterSpacing: '0.1em', color: 'var(--text-secondary)' }}>
-              EVENT BEGINS IN:
+              COUNTDOWN:
             </span>
             <div
               className="font-cinematic"
@@ -158,197 +149,472 @@ export default function HostelWars() {
           </div>
         </div>
 
-        {/* 8 Houses Majestic Podium Grid with Aceternity FocusCards & CardSpotlight */}
-        <FocusCards
-          blurAmount="1px"
-          unfocusedOpacity={0.65}
-          unfocusedScale={0.98}
+        {/* Top 3 Podium Highlights */}
+        <div
           style={{
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '1.5rem',
-            width: '100%',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1.25rem',
+            marginBottom: '3rem',
           }}
         >
-          {housesList.map((house, rankIndex) => {
-            const isLeader = rankIndex === 0;
-            const isSelected = selectedHouseId === house.id;
+          {sortedHouses.slice(0, 3).map((house, idx) => {
+            const rank = idx + 1;
+            const rankColor = rank === 1 ? '#FFD166' : rank === 2 ? '#E2E8F0' : '#CD7F32';
+            const rankTitle = rank === 1 ? '1ST PLACE • REIGNING LEADER' : rank === 2 ? '2ND PLACE • CONTENDER' : '3RD PLACE • VANGUARD';
 
             return (
-              <CardSpotlight
+              <div
                 key={house.id}
-                color={house.color}
-                glowRadius={280}
-                tilt={true}
-                className="group relative transition-all duration-400"
                 style={{
-                  border: `1.5px solid ${isSelected ? house.color : `${house.color}55`}`,
-                  boxShadow: isLeader
-                    ? `0 10px 40px ${house.accentGlow}, inset 0 1px 0 rgba(255,255,255,0.2)`
-                    : `0 8px 25px rgba(0,0,0,0.8)`,
-                  overflow: 'hidden',
-                  position: 'relative',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  background: 'rgba(14, 16, 22, 0.92)',
+                  background: 'rgba(15, 18, 24, 0.85)',
+                  border: `1.5px solid ${rank === 1 ? 'rgba(255, 209, 102, 0.6)' : 'rgba(255, 77, 0, 0.25)'}`,
                   borderRadius: '16px',
+                  padding: '1.5rem',
+                  position: 'relative',
+                  boxShadow: rank === 1 ? '0 10px 30px rgba(255, 209, 102, 0.15)' : '0 8px 24px rgba(0,0,0,0.6)',
+                  backdropFilter: 'blur(12px)',
                 }}
-                onClick={() => setSelectedHouseId(house.id)}
               >
-                {/* Crown / Rank Badge */}
                 <div
                   style={{
                     position: 'absolute',
                     top: '12px',
-                    right: '12px',
+                    right: '14px',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px',
-                    padding: '3px 10px',
-                    borderRadius: '12px',
-                    background: isLeader ? 'rgba(229, 169, 60, 0.25)' : 'rgba(255, 255, 255, 0.08)',
-                    border: `1px solid ${isLeader ? '#E5A93C' : 'rgba(255, 255, 255, 0.15)'}`,
-                    color: isLeader ? '#FFD166' : 'var(--text-secondary)',
+                    gap: '5px',
                     fontSize: '0.72rem',
                     fontWeight: '800',
-                    letterSpacing: '0.1em',
-                    zIndex: 5,
+                    color: rankColor,
+                    background: 'rgba(0,0,0,0.5)',
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    border: `1px solid ${rankColor}44`,
                   }}
                 >
-                  {isLeader ? (
-                    <>
-                      <Crown size={13} style={{ fill: '#FFD166' }} />
-                      #1 RANK
-                    </>
-                  ) : (
-                    `#${rankIndex + 1} RANK`
-                  )}
+                  <Crown size={13} style={{ fill: rankColor }} />
+                  {rankTitle}
                 </div>
 
-                {/* Banner Header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '0.5rem' }}>
+                  <div
+                    style={{
+                      fontSize: '2.4rem',
+                      width: '56px',
+                      height: '56px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '12px',
+                      background: `${house.color}22`,
+                      border: `1px solid ${house.color}55`,
+                    }}
+                  >
+                    {house.sigil}
+                  </div>
+                  <div>
+                    <h3
+                      className="font-cinematic"
+                      style={{
+                        fontSize: '1.4rem',
+                        fontWeight: '900',
+                        color: '#FFFFFF',
+                        letterSpacing: '0.05em',
+                        margin: 0,
+                      }}
+                    >
+                      {house.name}
+                    </h3>
+                    <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: house.color, fontWeight: '700' }}>
+                      {house.motto}
+                    </p>
+                  </div>
+                </div>
+
                 <div
                   style={{
-                    padding: '2rem 1.25rem 1rem 1.25rem',
-                    textAlign: 'center',
-                    borderBottom: `1px solid ${house.color}33`,
-                    background: `linear-gradient(180deg, ${house.color}18 0%, transparent 100%)`,
+                    marginTop: '1.25rem',
+                    padding: '10px 14px',
+                    borderRadius: '10px',
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    justifyContent: 'space-between',
                   }}
                 >
-                  <FloatingElements duration={4 + rankIndex * 0.3} distance={5}>
-                    <div style={{ fontSize: '2.2rem', marginBottom: '4px', filter: `drop-shadow(0 0 12px ${house.color})` }}>
-                      {house.sigil}
-                    </div>
-                  </FloatingElements>
-
-                  <h3
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                    Battle Points
+                  </span>
+                  <div
                     className="font-cinematic"
                     style={{
                       fontSize: '1.6rem',
                       fontWeight: '900',
-                      color: '#FFFFFF',
-                      letterSpacing: '0.08em',
-                      margin: '4px 0',
-                      textShadow: `0 0 15px ${house.accentGlow}`,
-                    }}
-                  >
-                    <ShinyText text={house.name} shimmerColor={house.color} />
-                  </h3>
-
-                  <div
-                    style={{
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.18em',
                       color: house.color,
-                      fontWeight: '800',
-                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
                     }}
                   >
-                    {house.motto}
+                    {house.points.toLocaleString()} PTS
                   </div>
                 </div>
-
-                {/* Body Content */}
-                <div style={{ padding: '1.5rem 1.25rem', textAlign: 'center', display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between' }}>
-                  {/* Points Counter */}
-                  <div style={{ margin: '0.75rem 0' }}>
-                    <div
-                      className="font-cinematic"
-                      style={{
-                        fontSize: '2.5rem',
-                        fontWeight: '900',
-                        color: house.color,
-                        lineHeight: '1',
-                        textShadow: `0 0 20px ${house.accentGlow}`,
-                      }}
-                    >
-                      <ShinyText text={house.points.toLocaleString()} shimmerColor="#FFFFFF" />
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '0.68rem',
-                        letterSpacing: '0.25em',
-                        color: 'var(--text-muted)',
-                        textTransform: 'uppercase',
-                        marginTop: '4px',
-                      }}
-                    >
-                      BATTLE POINTS
-                    </div>
-                  </div>
-
-                  {/* Cheer Button with Magnetic physics */}
-                  <div>
-                    <Magnetic strength={0.15}>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCheer(house.id, e);
-                        }}
-                        style={{
-                          width: '100%',
-                          padding: '10px 14px',
-                          borderRadius: '8px',
-                          background: `linear-gradient(135deg, ${house.color} 0%, rgba(0,0,0,0.85) 100%)`,
-                          border: `1px solid ${house.color}`,
-                          color: '#FFFFFF',
-                          fontSize: '0.8rem',
-                          fontWeight: '800',
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '6px',
-                          cursor: 'pointer',
-                          boxShadow: `0 4px 15px ${house.accentGlow}`,
-                        }}
-                      >
-                        <Flame size={14} style={{ fill: 'currentColor' }} />
-                        CHEER (+10)
-                      </button>
-                    </Magnetic>
-
-                    <div style={{ marginTop: '0.75rem' }}>
-                      <Button
-                        to={`/house/${house.id}`}
-                        variant="outline"
-                        size="sm"
-                        style={{ width: '100%', fontSize: '0.75rem', padding: '6px 12px' }}
-                      >
-                        VIEW ACTIVITIES →
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardSpotlight>
+              </div>
             );
           })}
-        </FocusCards>
+        </div>
 
-        {/* Bottom Banner with Aceternity MovingBorder */}
-        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', letterSpacing: '0.1em', marginBottom: '1.25rem' }}>
-            EARN POINTS FOR YOUR HOUSE IN SPORTS DERBIES, LAN GAMING INFERNO & GOTHIC CULTURAL BATTLES.
+        {/* The Battle Points Graph Visualizer */}
+        <div
+          style={{
+            background: 'rgba(12, 14, 20, 0.92)',
+            borderRadius: '20px',
+            border: '1px solid rgba(255, 77, 0, 0.3)',
+            padding: '2rem 1.75rem',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.75)',
+            backdropFilter: 'blur(20px)',
+            position: 'relative',
+          }}
+        >
+          {/* Header of Graph */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '2rem',
+              gap: '1rem',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              paddingBottom: '1.25rem',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <BarChart3 size={20} style={{ color: '#FF4D00' }} />
+                <h3
+                  className="font-cinematic"
+                  style={{
+                    fontSize: '1.3rem',
+                    fontWeight: '900',
+                    color: '#FFFFFF',
+                    letterSpacing: '0.08em',
+                    margin: 0,
+                  }}
+                >
+                  POINTS DISTRIBUTION GRAPH
+                </h3>
+              </div>
+              <p style={{ margin: '4px 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                Dynamically computed rankings. Edit point values in <code style={{ color: '#FF8533', background: 'rgba(255,77,0,0.1)', padding: '2px 6px', borderRadius: '4px' }}>src/data/leaderboardData.js</code> to update standings.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                type="button"
+                onClick={() => setGraphMode('bars')}
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  fontWeight: '700',
+                  border: '1px solid',
+                  borderColor: graphMode === 'bars' ? '#FF4D00' : 'rgba(255,255,255,0.12)',
+                  background: graphMode === 'bars' ? 'rgba(255, 77, 0, 0.2)' : 'rgba(255,255,255,0.03)',
+                  color: graphMode === 'bars' ? '#FF8533' : 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                Horizontal Bars
+              </button>
+              <button
+                type="button"
+                onClick={() => setGraphMode('columns')}
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: '8px',
+                  fontSize: '0.78rem',
+                  fontWeight: '700',
+                  border: '1px solid',
+                  borderColor: graphMode === 'columns' ? '#FF4D00' : 'rgba(255,255,255,0.12)',
+                  background: graphMode === 'columns' ? 'rgba(255, 77, 0, 0.2)' : 'rgba(255,255,255,0.03)',
+                  color: graphMode === 'columns' ? '#FF8533' : 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                Vertical Columns
+              </button>
+            </div>
+          </div>
+
+          {/* Mode 1: Horizontal High-Tech Progress Bars */}
+          {graphMode === 'bars' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {sortedHouses.map((house, index) => {
+                const percent = Math.max(12, Math.round((house.points / maxPoints) * 100));
+                const rank = index + 1;
+                const isSelected = selectedHouseId === house.id;
+
+                return (
+                  <div
+                    key={house.id}
+                    onClick={() => setSelectedHouseId(isSelected ? null : house.id)}
+                    style={{
+                      cursor: 'pointer',
+                      padding: '10px 14px',
+                      borderRadius: '12px',
+                      background: isSelected ? 'rgba(255, 77, 0, 0.08)' : 'rgba(255, 255, 255, 0.02)',
+                      border: `1px solid ${isSelected ? house.color : 'rgba(255, 255, 255, 0.06)'}`,
+                      transition: 'all 0.25s ease',
+                    }}
+                  >
+                    {/* Bar Label Row */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginBottom: '8px',
+                        flexWrap: 'wrap',
+                        gap: '8px',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span
+                          style={{
+                            width: '26px',
+                            height: '26px',
+                            borderRadius: '50%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '0.75rem',
+                            fontWeight: '800',
+                            background: rank === 1 ? '#FFD166' : rank === 2 ? '#CBD5E1' : rank === 3 ? '#CD7F32' : 'rgba(255,255,255,0.1)',
+                            color: rank <= 3 ? '#000000' : '#FFFFFF',
+                          }}
+                        >
+                          {rank}
+                        </span>
+                        <span style={{ fontSize: '1.2rem' }}>{house.sigil}</span>
+                        <span
+                          className="font-cinematic"
+                          style={{
+                            fontSize: '1.05rem',
+                            fontWeight: '800',
+                            color: '#FFFFFF',
+                            letterSpacing: '0.05em',
+                          }}
+                        >
+                          {house.name}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            color: house.color,
+                            letterSpacing: '0.1em',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                          }}
+                        >
+                          {house.motto}
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--text-muted)',
+                            letterSpacing: '0.08em',
+                          }}
+                        >
+                          {percent}% OF PEAK
+                        </span>
+                        <div
+                          className="font-cinematic"
+                          style={{
+                            fontSize: '1.25rem',
+                            fontWeight: '900',
+                            color: house.color,
+                            minWidth: '90px',
+                            textAlign: 'right',
+                          }}
+                        >
+                          {house.points.toLocaleString()} PTS
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Visual Bar Track */}
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '14px',
+                        borderRadius: '7px',
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: `${percent}%`,
+                          height: '100%',
+                          background: `linear-gradient(90deg, ${house.color}77 0%, ${house.color} 100%)`,
+                          borderRadius: '7px',
+                          boxShadow: `0 0 15px ${house.accentGlow}`,
+                          transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+                          position: 'relative',
+                        }}
+                      >
+                        {/* Shimmer pulse line */}
+                        <div
+                          style={{
+                            position: 'absolute',
+                            top: 0,
+                            right: 0,
+                            width: '4px',
+                            height: '100%',
+                            background: '#FFFFFF',
+                            boxShadow: '0 0 8px #FFFFFF',
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Mode 2: Vertical Columns Chart */}
+          {graphMode === 'columns' && (
+            <div style={{ width: '100%', overflowX: 'auto', paddingBottom: '1rem' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  minWidth: '600px',
+                  height: '320px',
+                  paddingTop: '2rem',
+                  borderBottom: '2px solid rgba(255, 77, 0, 0.3)',
+                  position: 'relative',
+                }}
+              >
+                {/* Horizontal guide lines */}
+                <div style={{ position: 'absolute', top: '25%', left: 0, right: 0, borderTop: '1px dashed rgba(255,255,255,0.06)' }} />
+                <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, borderTop: '1px dashed rgba(255,255,255,0.06)' }} />
+                <div style={{ position: 'absolute', top: '75%', left: 0, right: 0, borderTop: '1px dashed rgba(255,255,255,0.06)' }} />
+
+                {sortedHouses.map((house, idx) => {
+                  const percent = Math.max(14, Math.round((house.points / maxPoints) * 100));
+                  const rank = idx + 1;
+
+                  return (
+                    <div
+                      key={house.id}
+                      style={{
+                        flex: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        height: '100%',
+                        position: 'relative',
+                        zIndex: 2,
+                      }}
+                    >
+                      {/* Point label at top of column */}
+                      <span
+                        className="font-cinematic"
+                        style={{
+                          fontSize: '0.85rem',
+                          fontWeight: '800',
+                          color: house.color,
+                          marginBottom: '6px',
+                        }}
+                      >
+                        {house.points}
+                      </span>
+
+                      {/* Bar Column */}
+                      <div
+                        style={{
+                          width: '70%',
+                          maxWidth: '48px',
+                          height: `${percent}%`,
+                          borderRadius: '8px 8px 0 0',
+                          background: `linear-gradient(180deg, ${house.color} 0%, ${house.color}66 100%)`,
+                          boxShadow: `0 -4px 15px ${house.accentGlow}`,
+                          transition: 'height 0.8s ease',
+                          position: 'relative',
+                        }}
+                      />
+
+                      {/* House Label beneath */}
+                      <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                        <div style={{ fontSize: '1.2rem', lineHeight: 1 }}>{house.sigil}</div>
+                        <div
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: '700',
+                            color: '#FFFFFF',
+                            marginTop: '4px',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
+                          H-{house.number}
+                        </div>
+                        <div style={{ fontSize: '0.65rem', color: house.color }}>
+                          #{rank}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Bottom Code-Editing Notice */}
+          <div
+            style={{
+              marginTop: '2rem',
+              padding: '12px 18px',
+              borderRadius: '10px',
+              background: 'rgba(255, 77, 0, 0.05)',
+              border: '1px solid rgba(255, 77, 0, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '10px',
+              fontSize: '0.82rem',
+              color: 'var(--text-secondary)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <TrendingUp size={16} style={{ color: '#FF8533' }} />
+              <span>
+                To adjust any house score, open <strong style={{ color: '#FFFFFF' }}>src/data/leaderboardData.js</strong> and change the numbers. The graph immediately adjusts in real time.
+              </span>
+            </div>
+            <span style={{ color: '#FFD166', fontWeight: '700' }}>
+              LEADER: {leaderHouse.name} ({leaderHouse.points} PTS)
+            </span>
+          </div>
+        </div>
+
+        {/* Enter Arena CTA */}
+        <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', letterSpacing: '0.1em', marginBottom: '1.25rem' }}>
+            EARN GLORY FOR YOUR HOSTEL IN SPORTS, LAN ESPORTS INFERNO & CULTURAL MASQUERADE.
           </p>
           <MovingBorder duration={3200} color="#FF4D00" borderRadius="30px" style={{ display: 'inline-block' }}>
             <Button to="/houses" variant="primary" size="lg" icon={<Shield size={18} />}>
@@ -361,4 +627,3 @@ export default function HostelWars() {
     </section>
   );
 }
-

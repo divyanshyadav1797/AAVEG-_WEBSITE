@@ -187,33 +187,29 @@ export default function Footer() {
               8 Houses clash across Sports, Esports, and Cultural arenas. Select your house to represent your fraternity.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <Magnetic strength={0.15}>
-                <div>
-                  <Button
-                    to="/houses"
-                    variant="primary"
-                    size="sm"
-                    icon={<Shield size={15} />}
-                    style={{ width: '100%' }}
-                  >
-                    SELECT YOUR HOUSE
-                  </Button>
-                </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', width: '100%' }}>
+              <Magnetic strength={0.15} style={{ width: '100%', display: 'block' }}>
+                <Button
+                  to="/houses"
+                  variant="primary"
+                  size="sm"
+                  icon={<Shield size={15} />}
+                  style={{ width: '100%', display: 'flex' }}
+                >
+                  SELECT YOUR HOUSE
+                </Button>
               </Magnetic>
 
-              <Magnetic strength={0.15}>
-                <div>
-                  <Button
-                    to="/leaderboard"
-                    variant="outline"
-                    size="sm"
-                    icon={<Trophy size={15} />}
-                    style={{ width: '100%' }}
-                  >
-                    VIEW LIVE LEADERBOARD
-                  </Button>
-                </div>
+              <Magnetic strength={0.15} style={{ width: '100%', display: 'block' }}>
+                <Button
+                  to="/leaderboard"
+                  variant="outline"
+                  size="sm"
+                  icon={<Trophy size={15} />}
+                  style={{ width: '100%', display: 'flex' }}
+                >
+                  VIEW LIVE LEADERBOARD
+                </Button>
               </Magnetic>
             </div>
           </div>

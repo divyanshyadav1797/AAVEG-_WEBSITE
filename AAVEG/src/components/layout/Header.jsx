@@ -175,19 +175,16 @@ export default function Header() {
               </div>
             </Magnetic>
 
-            <div className="desktop-only" style={{ display: 'block' }}>
+            <div className="desktop-only">
               <Magnetic strength={0.2}>
-                <div>
-                  <Button
-                    to={primaryCTA.to}
-                    variant="primary"
-                    size="sm"
-                    icon={<Shield size={14} />}
-                    style={{ boxShadow: '0 0 20px rgba(255,77,0,0.4)' }}
-                  >
-                    {primaryCTA.label}
-                  </Button>
-                </div>
+                <Button
+                  to={primaryCTA.to}
+                  variant="primary"
+                  size="sm"
+                  icon={<Shield size={14} />}
+                >
+                  {primaryCTA.label}
+                </Button>
               </Magnetic>
             </div>
 

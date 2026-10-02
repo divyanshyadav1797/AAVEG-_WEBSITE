@@ -1,64 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 /**
- * React Bits - Decrypted / GlitchText Component
- * Animates text characters with random gothic rune / cipher shuffling before settling on the real text.
+ * GlitchText Component
+ * Text glitch animation removed as requested for crisp, distraction-free legibility.
+ * Preserves class names, inline styles, and children/text props.
  */
 export default function GlitchText({
   text,
-  speed = 40,
-  maxIterations = 8,
-  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=~',
+  children,
   className = '',
   style = {},
-  triggerOnHover = true,
+  // Unused animation props retained for API backwards compatibility
+  speed,
+  maxIterations,
+  characters,
+  triggerOnHover,
+  ...props
 }) {
-  const [displayText, setDisplayText] = useState(text);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const startAnimation = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    let iteration = 0;
-
-    const interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split('')
-          .map((char, index) => {
-            if (char === ' ') return ' ';
-            if (index < iteration) {
-              return text[index];
-            }
-            return characters[Math.floor(Math.random() * characters.length)];
-          })
-          .join('')
-      );
-
-      if (iteration >= text.length) {
-        clearInterval(interval);
-        setIsAnimating(false);
-      }
-
-      iteration += 1 / (maxIterations / 2);
-    }, speed);
-  };
-
-  useEffect(() => {
-    startAnimation();
-  }, [text]);
+  const content = text !== undefined ? text : children;
 
   return (
     <span
       className={`glitch-text-element inline-block ${className}`}
-      onMouseEnter={triggerOnHover ? startAnimation : undefined}
       style={{
         display: 'inline-block',
-        cursor: triggerOnHover ? 'pointer' : 'default',
         ...style,
       }}
+      {...props}
     >
-      {displayText}
+      {content}
     </span>
   );
 }
+
