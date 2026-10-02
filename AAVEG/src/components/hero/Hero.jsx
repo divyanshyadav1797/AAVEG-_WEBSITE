@@ -254,6 +254,20 @@ export default function Hero({ onOpenTeaser }) {
           </span>
         </div>
       </div>
+
+      {/* Smooth Bottom Horizon Transition into 3D Scroll Journey */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '200px',
+          background: 'linear-gradient(180deg, transparent 0%, rgba(3, 4, 7, 0.5) 45%, #030407 100%)',
+          pointerEvents: 'none',
+          zIndex: 15,
+        }}
+      />
     </section>
   );
 }

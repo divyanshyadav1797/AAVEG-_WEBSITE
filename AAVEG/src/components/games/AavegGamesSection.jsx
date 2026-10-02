@@ -41,7 +41,7 @@ export default function AavegGamesSection() {
         paddingBottom: '6rem',
         position: 'relative',
         zIndex: 10,
-        backgroundColor: '#030406',
+        backgroundColor: 'transparent',
         overflow: 'hidden',
       }}
     >

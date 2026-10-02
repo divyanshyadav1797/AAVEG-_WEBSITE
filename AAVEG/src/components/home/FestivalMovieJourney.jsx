@@ -26,7 +26,6 @@ import FloatingElements from '../ui/FloatingElements';
 import ShinyText from '../ui/ShinyText';
 import FocusCards from '../ui/FocusCards';
 import GridBackground from '../ui/GridBackground';
-import ThreeScrollExperience from './ThreeScrollExperience';
 
 export default function FestivalMovieJourney() {
   const [activeAct, setActiveAct] = useState(0);
@@ -150,7 +149,7 @@ export default function FestivalMovieJourney() {
       className="movie-story-wrapper relative w-full"
       style={{
         position: 'relative',
-        backgroundColor: '#040507',
+        backgroundColor: 'transparent',
         color: '#FFFFFF',
         overflow: 'hidden',
       }}
@@ -158,9 +157,6 @@ export default function FestivalMovieJourney() {
       {/* Target Anchors for header navigation jumps */}
       <div id="about" style={{ position: 'absolute', top: 0, height: '1px' }} />
       <div id="nights" style={{ position: 'absolute', top: '25%', height: '1px' }} />
-
-      {/* 3D & 2D Three.js Scroll Engine inspired by re-the-drive */}
-      <ThreeScrollExperience scrollProgress={movieProgress} activeAct={activeAct} />
 
       {/* Sticky Director's Filmstrip HUD */}
       <div

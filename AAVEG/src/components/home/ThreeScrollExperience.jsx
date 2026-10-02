@@ -2,38 +2,34 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 /**
- * ThreeScrollExperience Component
- * Implements a full-page scroll-driven 3D cinematic flythrough experience inspired by
- * https://re-the-drive.webflow.io/
+ * ThreeScrollExperience Component (Gothic Halloween Edition)
+ * Replaces distracting neon sci-fi visuals with an authentic, scary, and atmospheric
+ * dark Halloween graveyard experience.
  *
- * Features:
- * - Full-page continuous flythrough from uppermost Hero down to the Games Arcade
- * - Procedural 3D Gothic Monoliths with pulsating runic energy channels
- * - 3D Dual-Ring Concentric Vortex Arches (Gateway Portals) at chapter waypoints
- * - 3D Floating Crystalline Artifacts (Octahedrons, Icosahedrons) with gentle bobbing
- * - 3D Roadway with cyber runway guide lights
- * - 2D/3D Hybrid Glowing Blood Moon in deep horizon with atmospheric corona
- * - Animated Flapping Bat Swarm with sinusoidal wing-flutter and flocking
- * - Volumetric Fire Ember & Cosmic Dust Cloud with scroll-velocity warp-stretch
- * - Sector-dependent dynamic lighting transitions (Amber -> Orange -> Purple -> Gold -> Cyan)
- * - Cyber-horror telemetry HUD overlay with real-time speed, depth, coords, and waypoints
- * - Smooth transition from the uppermost Hero into the deep corridor
- * - High performance: Clamped DPR, frustum culling, alpha channel, requestAnimationFrame lerp
+ * Atmospheric Features:
+ * - Ominous Blood Moon looming in the misty horizon with creeping clouds
+ * - Eerie weathered gothic tombstones, ancient burial crosses & stone obelisks
+ * - Sinister flickering Jack-o'-Lanterns (pumpkins) with carved glowing smiles
+ * - Silhouetted gnarled dead trees framing the cemetery path
+ * - Dense creeping ground fog and slow-drifting ethereal embers
+ * - Swarm of dark shadow bats flapping across the moonlit sky
+ * - Slow, chilling cinematic camera drift synced to page scroll
+ * - Dark, rich, muted Halloween palette (deep charcoals, blood crimson, warm candle embers)
+ * - Zero distracting cyber HUD; replaced by a subtle cinematic dark vignette
+ * - 100% non-intrusive: soft fog falloff ensures complete readability of foreground text & cards
  */
 export default function ThreeScrollExperience({
   scrollProgress = 0, // 0 to 100
-  scrollVelocity = 0, // dynamic scroll speed
-  activeSector = 0,
+  scrollVelocity = 0,
 }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
   const progressRef = useRef(scrollProgress);
   const velocityRef = useRef(scrollVelocity);
-  const sectorRef = useRef(activeSector);
   const isVisibleRef = useRef(true);
 
-  // Synchronize mutable refs without triggering re-render
+  // Synchronize mutable progress without re-renders
   useEffect(() => {
     progressRef.current = scrollProgress / 100;
   }, [scrollProgress]);
@@ -42,23 +38,7 @@ export default function ThreeScrollExperience({
     velocityRef.current = scrollVelocity;
   }, [scrollVelocity]);
 
-  useEffect(() => {
-    sectorRef.current = activeSector;
-  }, [activeSector]);
-
-  // Sector HUD Manifest inspired by re-the-drive
-  const sectorManifest = [
-    { code: 'SEC-00', time: '22:00', label: 'GATES OF MADNESS • PCE CAMPUS', coords: '26.784° N, 75.826° E', status: 'SANCTUARY APPROACH' },
-    { code: 'SEC-01', time: '23:58', label: 'PROLOGUE • THE AWAKENING', coords: '26.787° N, 75.829° E', status: 'INITIATING DISSOLUTION' },
-    { code: 'SEC-02', time: '02:14', label: 'THE MONOLITH • SAGA OF 4 NIGHTS', coords: '26.791° N, 75.834° E', status: 'CHAOS UNFOLDING' },
-    { code: 'SEC-03', time: '04:17', label: 'WAR ARENA • 8-HOUSE CLASH', coords: '26.796° N, 75.838° E', status: 'FACTION RIVALRY HIGH' },
-    { code: 'SEC-04', time: '05:12', label: 'CORONATION • CROWN OF CHAMPIONS', coords: '26.801° N, 75.843° E', status: 'ROYAL DECREE ISSUED' },
-    { code: 'SEC-05', time: '06:00', label: 'THE CLIMAX • HORROR ARCADE', coords: '26.806° N, 75.848° E', status: 'SURVIVAL PROTOCOL ON' },
-  ];
-
-  const currentSector = sectorManifest[activeSector] || sectorManifest[0];
-
-  // Mouse Parallax Listener
+  // Subtle Mouse Parallax Listener
   useEffect(() => {
     const handleMouseMove = (e) => {
       mouseRef.current.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -69,14 +49,12 @@ export default function ThreeScrollExperience({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Three.js Scene Setup & Loop
+  // Three.js Scene Setup & Render Loop
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // -------------------------------------------------------------
-    // 1. WebGL Renderer
-    // -------------------------------------------------------------
+    // 1. Renderer Setup
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: window.devicePixelRatio <= 1.5,
@@ -84,77 +62,76 @@ export default function ThreeScrollExperience({
       powerPreference: 'high-performance',
     });
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     renderer.setPixelRatio(dpr);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 0.95;
 
-    // -------------------------------------------------------------
-    // 2. Scene & Fog
-    // -------------------------------------------------------------
+    // 2. Scene & Deep Halloween Fog
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x030407, 0.013);
+    // Deep, ominous charcoal fog that conceals distant objects and enhances spookiness
+    scene.fog = new THREE.FogExp2(0x040508, 0.019);
 
-    // -------------------------------------------------------------
-    // 3. Perspective Camera
-    // -------------------------------------------------------------
+    // 3. Camera
     const camera = new THREE.PerspectiveCamera(
-      58,
+      56,
       window.innerWidth / window.innerHeight,
       0.1,
-      280
+      240
     );
-    // Starts at high vantage point overlooking the entrance
-    camera.position.set(0, 3.8, 38);
+    camera.position.set(0, 2.8, 32);
 
-    // -------------------------------------------------------------
-    // 4. Lights
-    // -------------------------------------------------------------
-    const ambientLight = new THREE.AmbientLight(0x160c08, 1.4);
+    // 4. Atmospheric Halloween Lighting
+    // Subtle cool midnight moonlight ambient
+    const ambientLight = new THREE.AmbientLight(0x0c1018, 1.1);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0xff4d00, 2.4);
-    dirLight1.position.set(6, 14, 12);
-    scene.add(dirLight1);
+    // Pale, eerie silver moonlight from behind
+    const moonLight = new THREE.DirectionalLight(0x556688, 1.4);
+    moonLight.position.set(-6, 18, -30);
+    scene.add(moonLight);
 
-    const dirLight2 = new THREE.DirectionalLight(0x7928ca, 1.5);
-    dirLight2.position.set(-8, 8, -40);
-    scene.add(dirLight2);
+    // Ominous warm ember rim light
+    const bloodLight = new THREE.DirectionalLight(0x8a1505, 1.6);
+    bloodLight.position.set(8, 12, 10);
+    scene.add(bloodLight);
 
-    const travelingLight = new THREE.PointLight(0xff3b00, 4.0, 55, 1.4);
-    travelingLight.position.set(0, 3, 30);
-    scene.add(travelingLight);
+    // Traveling candle flame following camera
+    const candleLight = new THREE.PointLight(0xff5500, 2.2, 35, 1.8);
+    candleLight.position.set(0, 2, 28);
+    scene.add(candleLight);
 
     // -------------------------------------------------------------
-    // 5. 2D/3D Hybrid Blood Moon in Horizon
+    // 5. Ominous Blood Moon in Horizon
     // -------------------------------------------------------------
-    const createMoonTexture = () => {
+    const createBloodMoonTexture = () => {
       const size = 512;
       const moonCanvas = document.createElement('canvas');
       moonCanvas.width = size;
       moonCanvas.height = size;
       const ctx = moonCanvas.getContext('2d');
 
-      // Outer Corona Glow
-      const grad = ctx.createRadialGradient(size / 2, size / 2, 70, size / 2, size / 2, size / 2);
-      grad.addColorStop(0, '#FFE8D6');
-      grad.addColorStop(0.25, '#FF5500');
-      grad.addColorStop(0.65, '#990000');
-      grad.addColorStop(0.85, 'rgba(150, 0, 0, 0.2)');
+      // Deep Blood Corona
+      const grad = ctx.createRadialGradient(size / 2, size / 2, 80, size / 2, size / 2, size / 2);
+      grad.addColorStop(0, '#FFE3D0');
+      grad.addColorStop(0.2, '#FF5000');
+      grad.addColorStop(0.55, '#800A02');
+      grad.addColorStop(0.8, 'rgba(90, 5, 0, 0.25)');
       grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, size, size);
 
-      // Moon Surface Craters
-      ctx.fillStyle = 'rgba(20, 5, 2, 0.4)';
+      // Sinister Dark Craters
+      ctx.fillStyle = 'rgba(15, 3, 2, 0.55)';
       const craters = [
-        { x: 210, y: 220, r: 45 },
-        { x: 280, y: 190, r: 35 },
-        { x: 310, y: 270, r: 50 },
-        { x: 190, y: 310, r: 38 },
-        { x: 240, y: 290, r: 28 },
+        { x: 215, y: 210, r: 48 },
+        { x: 290, y: 195, r: 38 },
+        { x: 310, y: 280, r: 54 },
+        { x: 185, y: 315, r: 42 },
+        { x: 245, y: 295, r: 32 },
+        { x: 260, y: 240, r: 24 },
       ];
       craters.forEach((c) => {
         ctx.beginPath();
@@ -165,8 +142,8 @@ export default function ThreeScrollExperience({
       return new THREE.CanvasTexture(moonCanvas);
     };
 
-    const moonTexture = createMoonTexture();
-    const moonGeom = new THREE.PlaneGeometry(36, 36);
+    const moonTexture = createBloodMoonTexture();
+    const moonGeom = new THREE.PlaneGeometry(38, 38);
     const moonMat = new THREE.MeshBasicMaterial({
       map: moonTexture,
       transparent: true,
@@ -174,192 +151,272 @@ export default function ThreeScrollExperience({
       depthWrite: false,
     });
     const moonMesh = new THREE.Mesh(moonGeom, moonMat);
-    moonMesh.position.set(0, 26, -180);
+    moonMesh.position.set(0, 24, -170);
     scene.add(moonMesh);
 
     // -------------------------------------------------------------
-    // 6. 3D Procedural Gothic Monoliths with Pulsing Rune Strips
+    // 6. Damp Cemetery Ground Plane with Dark Mist
     // -------------------------------------------------------------
-    const monolithGroup = new THREE.Group();
-    const pillarGeom = new THREE.BoxGeometry(1.8, 10.5, 1.8);
-    const pillarMat = new THREE.MeshStandardMaterial({
-      color: 0x0c0e14,
-      roughness: 0.8,
-      metalness: 0.35,
+    const groundGeom = new THREE.PlaneGeometry(80, 260, 32, 64);
+    const groundMat = new THREE.MeshStandardMaterial({
+      color: 0x07080b,
+      roughness: 0.95,
+      metalness: 0.1,
+    });
+    const ground = new THREE.Mesh(groundGeom, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.set(0, -0.6, -60);
+    scene.add(ground);
+
+    // -------------------------------------------------------------
+    // 7. Weathered Gothic Gravestones & Ancient Burial Crosses
+    // -------------------------------------------------------------
+    const cemeteryGroup = new THREE.Group();
+    const stoneMat = new THREE.MeshStandardMaterial({
+      color: 0x111318,
+      roughness: 0.95,
+      metalness: 0.15,
     });
 
-    const runeGeom = new THREE.BoxGeometry(0.2, 8.8, 0.2);
-    const runeMaterials = [
-      new THREE.MeshBasicMaterial({ color: 0xff4d00 }),
-      new THREE.MeshBasicMaterial({ color: 0xff3b00 }),
-      new THREE.MeshBasicMaterial({ color: 0xff8533 }),
-    ];
-
-    const crownGeom = new THREE.OctahedronGeometry(0.9, 0);
-    const crownMat = new THREE.MeshStandardMaterial({
-      color: 0x1f1412,
-      emissive: 0xff4d00,
-      emissiveIntensity: 0.5,
-      roughness: 0.3,
-      metalness: 0.6,
+    const mossyStoneMat = new THREE.MeshStandardMaterial({
+      color: 0x181a17,
+      roughness: 0.9,
+      metalness: 0.1,
     });
 
-    const crowns = [];
-    const runes = [];
-    const numPillars = 28;
+    const slabGeom = new THREE.BoxGeometry(1.2, 2.2, 0.4);
+    const crossVertGeom = new THREE.BoxGeometry(0.35, 2.6, 0.35);
+    const crossHorizGeom = new THREE.BoxGeometry(1.4, 0.35, 0.35);
+    const obeliskGeom = new THREE.ConeGeometry(0.7, 4.5, 4);
 
-    for (let i = 0; i < numPillars; i++) {
-      const zPos = 32 - i * 6.5;
-      const xOffset = 6.2 + (i % 2) * 1.5;
+    const numGraves = 36;
+    for (let g = 0; g < numGraves; g++) {
+      const zPos = 26 - g * 5.2;
+      const isLeft = g % 2 === 0;
+      const xPos = (isLeft ? -1 : 1) * (4.2 + Math.random() * 3.5);
+      const graveType = g % 3;
 
-      // Left Pillar
-      const leftPillar = new THREE.Mesh(pillarGeom, pillarMat);
-      leftPillar.position.set(-xOffset, 4.2, zPos);
-      monolithGroup.add(leftPillar);
+      const grave = new THREE.Group();
+      grave.position.set(xPos, 0.5, zPos);
 
-      const leftRune = new THREE.Mesh(runeGeom, runeMaterials[i % 3]);
-      leftRune.position.set(-xOffset + 0.92, 4.2, zPos);
-      monolithGroup.add(leftRune);
-      runes.push(leftRune);
+      // Crooked angle for ancient weathered cemetery look
+      grave.rotation.y = (Math.random() - 0.5) * 0.4;
+      grave.rotation.z = (Math.random() - 0.5) * 0.15;
+      grave.rotation.x = (Math.random() - 0.5) * 0.1;
 
-      // Right Pillar
-      const rightPillar = new THREE.Mesh(pillarGeom, pillarMat);
-      rightPillar.position.set(xOffset, 4.2, zPos);
-      monolithGroup.add(rightPillar);
-
-      const rightRune = new THREE.Mesh(runeGeom, runeMaterials[i % 3]);
-      rightRune.position.set(xOffset - 0.92, 4.2, zPos);
-      monolithGroup.add(rightRune);
-      runes.push(rightRune);
-
-      // Floating Crown Caps on alternating pillars
-      if (i % 2 === 0) {
-        const leftCrown = new THREE.Mesh(crownGeom, crownMat);
-        leftCrown.position.set(-xOffset, 10.8, zPos);
-        monolithGroup.add(leftCrown);
-        crowns.push(leftCrown);
-
-        const rightCrown = new THREE.Mesh(crownGeom, crownMat);
-        rightCrown.position.set(xOffset, 10.8, zPos);
-        monolithGroup.add(rightCrown);
-        crowns.push(rightCrown);
+      if (graveType === 0) {
+        // Arch-topped burial stone
+        const slab = new THREE.Mesh(slabGeom, stoneMat);
+        grave.add(slab);
+      } else if (graveType === 1) {
+        // Ancient Cemetery Cross
+        const vert = new THREE.Mesh(crossVertGeom, mossyStoneMat);
+        const horiz = new THREE.Mesh(crossHorizGeom, mossyStoneMat);
+        horiz.position.set(0, 0.4, 0);
+        grave.add(vert);
+        grave.add(horiz);
+      } else {
+        // Gothic Spire / Obelisk
+        const obelisk = new THREE.Mesh(obeliskGeom, stoneMat);
+        obelisk.position.set(0, 1.2, 0);
+        grave.add(obelisk);
       }
+
+      cemeteryGroup.add(grave);
     }
-    scene.add(monolithGroup);
+    scene.add(cemeteryGroup);
 
     // -------------------------------------------------------------
-    // 7. 3D Concentric Dual-Ring Vortex Portals (Gateway Arches)
+    // 8. Sinister Flickering Jack-o'-Lanterns (Halloween Pumpkins)
     // -------------------------------------------------------------
-    const portalsGroup = new THREE.Group();
-    const portalWaypoints = [18, -14, -50, -88, -126];
-    const portalRings = [];
+    const pumpkinGroup = new THREE.Group();
+    const pumpkinLights = [];
 
-    const outerRingGeom = new THREE.TorusGeometry(5.8, 0.22, 16, 48);
-    const innerRingGeom = new THREE.TorusGeometry(4.4, 0.14, 12, 36);
+    const createCarvedPumpkinFace = () => {
+      const size = 256;
+      const pCanvas = document.createElement('canvas');
+      pCanvas.width = size;
+      pCanvas.height = size;
+      const pCtx = pCanvas.getContext('2d');
 
-    const outerRingMat = new THREE.MeshStandardMaterial({
-      color: 0x1f1418,
-      roughness: 0.4,
-      metalness: 0.8,
+      // Base weathered ribbed pumpkin skin
+      pCtx.fillStyle = '#9e3a00';
+      pCtx.fillRect(0, 0, size, size);
+
+      // Vertical pumpkin ribs
+      pCtx.fillStyle = '#5c1e00';
+      for (let r = 0; r < size; r += 28) {
+        pCtx.fillRect(r, 0, 5, size);
+      }
+
+      // Glowing carved face in fiery amber
+      pCtx.fillStyle = '#FFE270';
+      pCtx.shadowColor = '#FF3B00';
+      pCtx.shadowBlur = 12;
+
+      // Left Eye (Angular sinister triangle)
+      pCtx.beginPath();
+      pCtx.moveTo(70, 95);
+      pCtx.lineTo(105, 75);
+      pCtx.lineTo(100, 115);
+      pCtx.closePath();
+      pCtx.fill();
+
+      // Right Eye
+      pCtx.beginPath();
+      pCtx.moveTo(186, 95);
+      pCtx.lineTo(151, 75);
+      pCtx.lineTo(156, 115);
+      pCtx.closePath();
+      pCtx.fill();
+
+      // Nose
+      pCtx.beginPath();
+      pCtx.moveTo(128, 125);
+      pCtx.lineTo(118, 145);
+      pCtx.lineTo(138, 145);
+      pCtx.closePath();
+      pCtx.fill();
+
+      // Sinister jagged toothy smile
+      pCtx.beginPath();
+      pCtx.moveTo(60, 165);
+      pCtx.lineTo(80, 185);
+      pCtx.lineTo(95, 170);
+      pCtx.lineTo(110, 192);
+      pCtx.lineTo(128, 172);
+      pCtx.lineTo(146, 192);
+      pCtx.lineTo(161, 170);
+      pCtx.lineTo(176, 185);
+      pCtx.lineTo(196, 165);
+      pCtx.lineTo(180, 205);
+      pCtx.lineTo(146, 215);
+      pCtx.lineTo(128, 202);
+      pCtx.lineTo(110, 215);
+      pCtx.lineTo(76, 205);
+      pCtx.closePath();
+      pCtx.fill();
+
+      return new THREE.CanvasTexture(pCanvas);
+    };
+
+    const pumpkinTex = createCarvedPumpkinFace();
+    const pumpkinGeom = new THREE.SphereGeometry(0.65, 16, 16);
+    // Squash slightly for pumpkin shape
+    pumpkinGeom.scale(1.15, 0.9, 1.05);
+
+    const pumpkinMat = new THREE.MeshStandardMaterial({
+      map: pumpkinTex,
+      roughness: 0.85,
+      metalness: 0.1,
       emissive: 0xff3b00,
-      emissiveIntensity: 0.45,
+      emissiveIntensity: 0.7,
     });
 
-    const innerRingMat = new THREE.MeshBasicMaterial({
-      color: 0xff8533,
-      wireframe: true,
-    });
+    const stemGeom = new THREE.CylinderGeometry(0.06, 0.08, 0.35, 6);
+    const stemMat = new THREE.MeshStandardMaterial({ color: 0x1f2e14, roughness: 0.9 });
 
-    portalWaypoints.forEach((z) => {
-      const portal = new THREE.Group();
-      portal.position.set(0, 3.2, z);
+    // Place 10 pumpkins along the edges of the pathway
+    for (let p = 0; p < 10; p++) {
+      const zPos = 20 - p * 18;
+      const isLeft = p % 2 === 0;
+      const xPos = (isLeft ? -1 : 1) * (3.6 + (p % 3) * 0.6);
 
-      const outer = new THREE.Mesh(outerRingGeom, outerRingMat);
-      const inner = new THREE.Mesh(innerRingGeom, innerRingMat);
+      const pumpkin = new THREE.Group();
+      pumpkin.position.set(xPos, 0.0, zPos);
+      pumpkin.rotation.y = (isLeft ? 0.35 : -0.35) + (Math.random() - 0.5) * 0.3;
 
-      portal.add(outer);
-      portal.add(inner);
-      portalsGroup.add(portal);
+      const pMesh = new THREE.Mesh(pumpkinGeom, pumpkinMat);
+      pMesh.position.y = 0.45;
+      pumpkin.add(pMesh);
 
-      portalRings.push({ outer, inner, baseZ: z });
-    });
-    scene.add(portalsGroup);
+      const stem = new THREE.Mesh(stemGeom, stemMat);
+      stem.position.set(0, 0.95, 0);
+      stem.rotation.z = 0.2;
+      pumpkin.add(stem);
 
-    // -------------------------------------------------------------
-    // 8. 3D Floating Crystalline Artifacts (Octahedrons & Polyhedrons)
-    // -------------------------------------------------------------
-    const crystalsGroup = new THREE.Group();
-    const icosaGeom = new THREE.IcosahedronGeometry(1.1, 0);
-    const icosaMat = new THREE.MeshStandardMaterial({
-      color: 0x141824,
-      roughness: 0.2,
-      metalness: 0.85,
-      emissive: 0xff4d00,
-      emissiveIntensity: 0.5,
-      wireframe: true,
-    });
+      pumpkinGroup.add(pumpkin);
 
-    const crystals = [];
-    for (let c = 0; c < 12; c++) {
-      const mesh = new THREE.Mesh(icosaGeom, icosaMat);
-      const side = c % 2 === 0 ? 1 : -1;
-      mesh.position.set(
-        side * (3.8 + Math.random() * 2.5),
-        2.5 + Math.random() * 3.5,
-        24 - c * 13
-      );
-      crystalsGroup.add(mesh);
-      crystals.push({
-        mesh,
-        rotSpeedX: 0.008 + Math.random() * 0.01,
-        rotSpeedY: 0.012 + Math.random() * 0.01,
-        baseY: mesh.position.y,
-        floatFreq: 0.002 + Math.random() * 0.002,
-      });
+      // Flickering candlelight inside each pumpkin
+      const pLight = new THREE.PointLight(0xff5500, 1.4, 9, 2);
+      pLight.position.set(xPos, 0.6, zPos);
+      scene.add(pLight);
+      pumpkinLights.push({ light: pLight, baseIntensity: 1.4, flickerSeed: Math.random() * 50 });
     }
-    scene.add(crystalsGroup);
+    scene.add(pumpkinGroup);
 
     // -------------------------------------------------------------
-    // 9. 3D Roadway with Cyber Grid & Neon Runway Strips
+    // 9. Silhouetted Gnarled Dead Trees
     // -------------------------------------------------------------
-    const runwayGroup = new THREE.Group();
+    const treeGroup = new THREE.Group();
+    const woodMat = new THREE.MeshStandardMaterial({
+      color: 0x090a0d,
+      roughness: 0.95,
+      metalness: 0.05,
+    });
 
-    // Central Grid
-    const grid = new THREE.GridHelper(240, 90, 0xff4d00, 0x1c1015);
-    grid.position.set(0, -1.0, -50);
-    runwayGroup.add(grid);
+    const createSpookyTree = () => {
+      const tree = new THREE.Group();
 
-    // Lateral Neon Guide Strips
-    const stripGeom = new THREE.BoxGeometry(0.12, 0.08, 220);
-    const stripMat = new THREE.MeshBasicMaterial({ color: 0xff3b00 });
+      // Main gnarled trunk
+      const trunkGeom = new THREE.CylinderGeometry(0.35, 0.75, 7.5, 7);
+      const trunk = new THREE.Mesh(trunkGeom, woodMat);
+      trunk.position.y = 3.5;
+      trunk.rotation.z = (Math.random() - 0.5) * 0.15;
+      tree.add(trunk);
 
-    const leftStrip = new THREE.Mesh(stripGeom, stripMat);
-    leftStrip.position.set(-4.5, -0.96, -50);
-    runwayGroup.add(leftStrip);
+      // Menacing branches reaching out
+      const branchGeom = new THREE.CylinderGeometry(0.12, 0.25, 3.2, 5);
 
-    const rightStrip = new THREE.Mesh(stripGeom, stripMat);
-    rightStrip.position.set(4.5, -0.96, -50);
-    runwayGroup.add(rightStrip);
+      const branch1 = new THREE.Mesh(branchGeom, woodMat);
+      branch1.position.set(0.8, 5.2, 0);
+      branch1.rotation.z = -0.7;
+      branch1.rotation.y = 0.4;
+      tree.add(branch1);
 
-    scene.add(runwayGroup);
+      const branch2 = new THREE.Mesh(branchGeom, woodMat);
+      branch2.position.set(-0.9, 4.6, 0);
+      branch2.rotation.z = 0.8;
+      branch2.rotation.y = -0.3;
+      tree.add(branch2);
+
+      const branch3 = new THREE.Mesh(branchGeom, woodMat);
+      branch3.position.set(0, 6.2, 0.6);
+      branch3.rotation.x = 0.6;
+      branch3.rotation.z = 0.3;
+      tree.add(branch3);
+
+      return tree;
+    };
+
+    // Plant 12 sinister dead trees along the outer perimeter
+    for (let t = 0; t < 12; t++) {
+      const zPos = 24 - t * 15;
+      const isLeft = t % 2 === 0;
+      const xPos = (isLeft ? -1 : 1) * (8.5 + Math.random() * 4);
+
+      const tree = createSpookyTree();
+      tree.position.set(xPos, 0, zPos);
+      tree.rotation.y = Math.random() * Math.PI * 2;
+      treeGroup.add(tree);
+    }
+    scene.add(treeGroup);
 
     // -------------------------------------------------------------
-    // 10. 3D/2D Animated Flapping Bat Swarm
+    // 10. Swarm of Shadow Bats Flapping in the Night Sky
     // -------------------------------------------------------------
-    const batSwarmGroup = new THREE.Group();
+    const batGroup = new THREE.Group();
     const bats = [];
 
-    const createBatMesh = () => {
+    const createBat = () => {
       const batObj = new THREE.Group();
-
-      // Wing Shape
       const wingShape = new THREE.Shape();
       wingShape.moveTo(0, 0);
       wingShape.quadraticCurveTo(0.6, 0.4, 1.2, 0.1);
       wingShape.quadraticCurveTo(0.5, -0.2, 0, 0);
 
       const wingGeom = new THREE.ShapeGeometry(wingShape);
-      const wingMat = new THREE.MeshBasicMaterial({ color: 0x090a0e, side: THREE.DoubleSide });
+      const wingMat = new THREE.MeshBasicMaterial({ color: 0x06070a, side: THREE.DoubleSide });
 
       const leftWing = new THREE.Mesh(wingGeom, wingMat);
       leftWing.scale.set(-1, 1, 1);
@@ -370,64 +427,65 @@ export default function ThreeScrollExperience({
 
       batObj.add(leftWing);
       batObj.add(rightWing);
-      batObj.scale.set(0.65, 0.65, 0.65);
+      batObj.scale.set(0.6, 0.6, 0.6);
 
       return { batObj, leftWing, rightWing };
     };
 
-    for (let b = 0; b < 14; b++) {
-      const { batObj, leftWing, rightWing } = createBatMesh();
+    for (let b = 0; b < 16; b++) {
+      const { batObj, leftWing, rightWing } = createBat();
       batObj.position.set(
-        (Math.random() - 0.5) * 26,
-        6 + Math.random() * 7,
-        15 - Math.random() * 140
+        (Math.random() - 0.5) * 28,
+        5.5 + Math.random() * 6.5,
+        18 - Math.random() * 150
       );
-      batSwarmGroup.add(batObj);
+      batGroup.add(batObj);
       bats.push({
         obj: batObj,
         leftWing,
         rightWing,
-        flapSpeed: 0.016 + Math.random() * 0.008,
-        flutterOffset: Math.random() * 10,
-        driftSpeedX: (Math.random() - 0.5) * 0.02,
-        driftSpeedY: (Math.random() - 0.5) * 0.015,
+        flapSpeed: 0.014 + Math.random() * 0.008,
+        flutterOffset: Math.random() * 20,
+        driftX: (Math.random() - 0.5) * 0.018,
+        driftY: (Math.random() - 0.5) * 0.012,
       });
     }
-    scene.add(batSwarmGroup);
+    scene.add(batGroup);
 
     // -------------------------------------------------------------
-    // 11. Volumetric Ember & Warp Streak Particles
+    // 11. Low-Lying Graveyard Fog & Ethereal Drifting Embers
     // -------------------------------------------------------------
-    const particleCount = 850;
-    const particleGeom = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    const particleVelocities = new Float32Array(particleCount * 3);
+    const emberCount = 550;
+    const emberGeom = new THREE.BufferGeometry();
+    const emberPositions = new Float32Array(emberCount * 3);
+    const emberVelocities = new Float32Array(emberCount * 3);
 
-    for (let p = 0; p < particleCount; p++) {
-      particlePositions[p * 3] = (Math.random() - 0.5) * 42;
-      particlePositions[p * 3 + 1] = Math.random() * 16 - 1;
-      particlePositions[p * 3 + 2] = (Math.random() - 0.5) * 200 - 30;
+    for (let e = 0; e < emberCount; e++) {
+      emberPositions[e * 3] = (Math.random() - 0.5) * 36;
+      emberPositions[e * 3 + 1] = Math.random() * 8 - 0.5; // Stays close to ground and mid-air
+      emberPositions[e * 3 + 2] = (Math.random() - 0.5) * 190 - 30;
 
-      particleVelocities[p * 3] = (Math.random() - 0.5) * 0.03;
-      particleVelocities[p * 3 + 1] = 0.015 + Math.random() * 0.03;
-      particleVelocities[p * 3 + 2] = (Math.random() - 0.5) * 0.03;
+      emberVelocities[e * 3] = (Math.random() - 0.5) * 0.012;
+      emberVelocities[e * 3 + 1] = 0.008 + Math.random() * 0.016; // Gentle rising drift
+      emberVelocities[e * 3 + 2] = (Math.random() - 0.5) * 0.012;
     }
 
-    particleGeom.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    emberGeom.setAttribute('position', new THREE.BufferAttribute(emberPositions, 3));
 
-    const particleMat = new THREE.PointsMaterial({
-      color: 0xff7700,
-      size: 0.18,
+    const emberMat = new THREE.PointsMaterial({
+      color: 0xff6600,
+      size: 0.16,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.6,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
 
-    const particles = new THREE.Points(particleGeom, particleMat);
-    scene.add(particles);
+    const embers = new THREE.Points(emberGeom, emberMat);
+    scene.add(embers);
 
     // -------------------------------------------------------------
-    // 12. Resize & Observer
+    // 12. Resize & Intersection Observer
     // -------------------------------------------------------------
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -442,12 +500,12 @@ export default function ThreeScrollExperience({
     if (containerRef.current) observer.observe(containerRef.current);
 
     // -------------------------------------------------------------
-    // 13. Render Loop with Smooth Camera Flythrough & Warp
+    // 13. Haunting Cinematic Camera Tracking Loop
     // -------------------------------------------------------------
     let animationId;
-    let targetCameraZ = 38;
-    let currentCameraZ = 38;
-    let currentCameraY = 3.8;
+    let targetCameraZ = 32;
+    let currentCameraZ = 32;
+    let currentCameraY = 2.8;
 
     const renderLoop = (time) => {
       animationId = requestAnimationFrame(renderLoop);
@@ -455,97 +513,58 @@ export default function ThreeScrollExperience({
       if (!isVisibleRef.current) return;
 
       const p = progressRef.current; // 0 to 1
-      const vel = velocityRef.current; // current scroll velocity
 
-      // Camera Flythrough:
-      // At p = 0 (Hero): camera is at z = 38, y = 3.8 (high panoramic view)
-      // At p = 1 (Games): camera reaches z = -145 (deep subterranean arena)
-      targetCameraZ = 38 - p * 180;
-      currentCameraZ += (targetCameraZ - currentCameraZ) * 0.085;
+      // Chilling, grounded camera progression through the haunted graveyard
+      // At p = 0 (Hero): camera is perched at z = 32
+      // At p = 1 (Arcade): camera glides to z = -140
+      targetCameraZ = 32 - p * 172;
+      currentCameraZ += (targetCameraZ - currentCameraZ) * 0.06;
 
-      // Vertical trajectory: slightly elevates when entering key portals
-      const targetY = 2.8 + Math.sin(p * Math.PI * 4) * 0.5;
-      currentCameraY += (targetY - currentCameraY) * 0.06;
+      // Slight natural head-bob walking sensation
+      const targetY = 2.4 + Math.sin(p * Math.PI * 6) * 0.3;
+      currentCameraY += (targetY - currentCameraY) * 0.05;
 
-      // Mouse Parallax Lerp
+      // Subtle, non-distracting mouse parallax
       const m = mouseRef.current;
-      m.x += (m.targetX - m.x) * 0.05;
-      m.y += (m.targetY - m.y) * 0.05;
+      m.x += (m.targetX - m.x) * 0.04;
+      m.y += (m.targetY - m.y) * 0.04;
 
       camera.position.z = currentCameraZ;
-      camera.position.x = m.x * 1.6;
-      camera.position.y = currentCameraY - m.y * 0.7;
-      camera.rotation.y = -m.x * 0.06;
-      camera.rotation.x = m.y * 0.045;
+      camera.position.x = m.x * 1.2;
+      camera.position.y = currentCameraY - m.y * 0.45;
+      camera.rotation.y = -m.x * 0.035;
+      camera.rotation.x = m.y * 0.025;
 
-      // Traveling Point Light follows camera closely
-      travelingLight.position.set(camera.position.x, camera.position.y, currentCameraZ - 7);
+      // Candle follows near camera
+      candleLight.position.set(camera.position.x, camera.position.y - 0.4, currentCameraZ - 6);
 
-      // Light color shifts according to active sector
-      const sector = sectorRef.current;
-      if (sector >= 5) {
-        travelingLight.color.setHex(0x00e5ff); // Cyan in arcade
-      } else if (sector === 4) {
-        travelingLight.color.setHex(0xffd166); // Golden at coronation
-      } else if (sector === 3) {
-        travelingLight.color.setHex(0x9d4edd); // Purple at war arena
-      } else {
-        travelingLight.color.setHex(0xff3b00); // Flaming amber-crimson
-      }
+      // Candlelight subtle realistic flicker
+      candleLight.intensity = 2.0 + Math.sin(time * 0.012) * 0.35 + (Math.random() - 0.5) * 0.15;
 
-      // Rotate Concentric Gateway Rings
-      portalRings.forEach((pr, idx) => {
-        const speed = 0.007 * (idx % 2 === 0 ? 1 : -1);
-        pr.outer.rotation.z += speed;
-        pr.inner.rotation.z -= speed * 1.4;
+      // Pumpkin Lanterns flickering candle flame
+      pumpkinLights.forEach((pl) => {
+        const flicker = Math.sin(time * 0.015 + pl.flickerSeed) * 0.4 + (Math.random() - 0.5) * 0.2;
+        pl.light.intensity = Math.max(0.6, pl.baseIntensity + flicker);
       });
 
-      // Rotate Crown Pyramids & Crystals
-      crowns.forEach((c, idx) => {
-        c.rotation.y += 0.015 * (idx % 2 === 0 ? 1 : -1);
-      });
-
-      crystals.forEach((cr) => {
-        cr.mesh.rotation.x += cr.rotSpeedX;
-        cr.mesh.rotation.y += cr.rotSpeedY;
-        cr.mesh.position.y = cr.baseY + Math.sin(time * cr.floatFreq) * 0.35;
-      });
-
-      // Pulse Rune Bars
-      const pulseFactor = 0.4 + 0.6 * Math.sin(time * 0.0035);
-      runes.forEach((r, idx) => {
-        r.scale.y = 1 + Math.sin(time * 0.004 + idx) * 0.08;
-      });
-
-      // Flap Bats
+      // Bats gentle flapping & gliding
       bats.forEach((b) => {
         const flap = Math.sin(time * b.flapSpeed + b.flutterOffset) * 0.45;
         b.leftWing.rotation.z = -flap;
         b.rightWing.rotation.z = flap;
-        b.obj.position.x += b.driftSpeedX;
-        b.obj.position.y += b.driftSpeedY;
+        b.obj.position.x += b.driftX;
+        b.obj.position.y += b.driftY;
       });
 
-      // Drift Particles with Velocity-Based Stretch (Hyperspeed Warp)
-      const positions = particleGeom.attributes.position.array;
-      const warpStretch = Math.min(vel * 0.08, 1.8);
-
-      for (let i = 0; i < particleCount; i++) {
-        positions[i * 3 + 1] += particleVelocities[i * 3 + 1];
-        if (positions[i * 3 + 1] > 16) {
-          positions[i * 3 + 1] = -1;
-        }
-
-        // Slight drift towards camera during rapid scroll
-        if (warpStretch > 0.1) {
-          positions[i * 3 + 2] += warpStretch * 0.3;
-          if (positions[i * 3 + 2] > camera.position.z + 10) {
-            positions[i * 3 + 2] = camera.position.z - 120;
-          }
+      // Ethereal rising embers drift calmly
+      const pos = emberGeom.attributes.position.array;
+      for (let i = 0; i < emberCount; i++) {
+        pos[i * 3 + 1] += emberVelocities[i * 3 + 1];
+        if (pos[i * 3 + 1] > 8.5) {
+          pos[i * 3 + 1] = -0.5;
         }
       }
-      particleGeom.attributes.position.needsUpdate = true;
-      particleMat.size = 0.18 + Math.min(vel * 0.01, 0.4);
+      emberGeom.attributes.position.needsUpdate = true;
 
       renderer.render(scene, camera);
     };
@@ -553,7 +572,7 @@ export default function ThreeScrollExperience({
     animationId = requestAnimationFrame(renderLoop);
 
     // -------------------------------------------------------------
-    // Cleanup
+    // Cleanup Resources
     // -------------------------------------------------------------
     return () => {
       cancelAnimationFrame(animationId);
@@ -563,22 +582,20 @@ export default function ThreeScrollExperience({
       renderer.dispose();
       moonGeom.dispose();
       moonMat.dispose();
-      pillarGeom.dispose();
-      pillarMat.dispose();
-      runeGeom.dispose();
-      runeMaterials.forEach((m) => m.dispose());
-      crownGeom.dispose();
-      crownMat.dispose();
-      outerRingGeom.dispose();
-      outerRingMat.dispose();
-      innerRingGeom.dispose();
-      innerRingMat.dispose();
-      icosaGeom.dispose();
-      icosaMat.dispose();
-      stripGeom.dispose();
-      stripMat.dispose();
-      particleGeom.dispose();
-      particleMat.dispose();
+      groundGeom.dispose();
+      groundMat.dispose();
+      slabGeom.dispose();
+      crossVertGeom.dispose();
+      crossHorizGeom.dispose();
+      obeliskGeom.dispose();
+      stoneMat.dispose();
+      mossyStoneMat.dispose();
+      pumpkinGeom.dispose();
+      pumpkinMat.dispose();
+      stemGeom.dispose();
+      stemMat.dispose();
+      emberGeom.dispose();
+      emberMat.dispose();
     };
   }, []);
 
@@ -591,15 +608,15 @@ export default function ThreeScrollExperience({
         width: '100vw',
         height: '100vh',
         pointerEvents: 'none',
-        zIndex: 1, // Behind page text and interactive elements
+        zIndex: 1, // Deep behind all foreground text & cards
         overflow: 'hidden',
-        // Opacity smoothly increases as user scrolls down past the hero
-        opacity: Math.min(1, 0.35 + (scrollProgress / 15) * 0.65),
-        transition: 'opacity 0.25s ease-out',
+        // Smoothly blends in from the hero downwards
+        opacity: Math.min(0.9, 0.4 + (scrollProgress / 20) * 0.5),
+        transition: 'opacity 0.3s ease-out',
       }}
       aria-hidden="true"
     >
-      {/* Three.js WebGL Canvas */}
+      {/* Three.js Canvas */}
       <canvas
         ref={canvasRef}
         style={{
@@ -611,112 +628,31 @@ export default function ThreeScrollExperience({
         }}
       />
 
-      {/* Cyber-Horror Telemetry HUD (Re-The-Drive Style) */}
+      {/* Atmospheric Cinematic Horror Vignette (Zero Distraction, Pure Mood) */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          padding: 'clamp(0.75rem, 2.5vw, 2rem)',
+          background: 'radial-gradient(ellipse at center, transparent 35%, rgba(3, 4, 7, 0.65) 75%, #030407 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Ultra-subtle Gothic Atmospheric Watermark in bottom corner (unobtrusive) */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '1.25rem',
+          right: '1.5rem',
           fontFamily: 'monospace',
-          color: '#FF4D00',
-          fontSize: '0.72rem',
-          letterSpacing: '0.14em',
+          fontSize: '0.65rem',
+          letterSpacing: '0.2em',
+          color: 'rgba(255, 77, 0, 0.45)',
           textTransform: 'uppercase',
           pointerEvents: 'none',
-          opacity: scrollProgress > 3 ? 0.88 : 0.45,
-          transition: 'opacity 0.4s ease',
         }}
       >
-        {/* Top HUD Line */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#FF3B00',
-                boxShadow: '0 0 8px #FF3B00',
-                display: 'inline-block',
-                animation: 'pumpkinFlicker 1.5s infinite',
-              }}
-            />
-            <span style={{ color: '#FFFFFF', fontWeight: '800' }}>
-              THREE.JS 3D FLYTHROUGH // LIVE
-            </span>
-            <span style={{ color: 'rgba(255, 255, 255, 0.35)' }}>|</span>
-            <span>{currentSector.coords}</span>
-          </div>
-
-          <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-            <span>{currentSector.code}</span>
-            <span style={{ color: '#FFD166', fontWeight: '800' }}>{currentSector.time}</span>
-          </div>
-        </div>
-
-        {/* Center Lateral Targeting Brackets */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: 'clamp(0.75rem, 3vw, 2.5rem)',
-            transform: 'translateY(-50%)',
-            borderLeft: '2px solid rgba(255, 77, 0, 0.45)',
-            paddingLeft: '12px',
-            fontSize: '0.66rem',
-            color: 'rgba(255, 255, 255, 0.6)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '4px',
-          }}
-        >
-          <span>DEPTH: -{Math.round(scrollProgress * 2.8)}M</span>
-          <span>SPEED: {Math.min(99, Math.round(scrollVelocity * 2.2))} KM/H</span>
-          <span style={{ color: '#FF8533' }}>PCE FESTIVAL RUNWAY</span>
-        </div>
-
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: 'clamp(0.75rem, 3vw, 2.5rem)',
-            transform: 'translateY(-50%)',
-            borderRight: '2px solid rgba(255, 77, 0, 0.45)',
-            paddingRight: '12px',
-            textAlign: 'right',
-            fontSize: '0.66rem',
-            color: 'rgba(255, 255, 255, 0.6)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '4px',
-          }}
-        >
-          <span>ENGINE: 60 FPS</span>
-          <span style={{ color: '#FFD166' }}>{currentSector.status}</span>
-          <span>WAYPOINT SYNC: OK</span>
-        </div>
-
-        {/* Bottom HUD Bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '8px' }}>
-          <div>
-            <div style={{ color: '#FFFFFF', fontSize: '0.82rem', fontWeight: '800', letterSpacing: '0.12em' }}>
-              {currentSector.label}
-            </div>
-            <div style={{ color: 'rgba(255, 255, 255, 0.45)', fontSize: '0.65rem', marginTop: '2px' }}>
-              AAVEG 2026 // SCROLL-DRIVEN 3D SPATIAL VOYAGE
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: 'rgba(255, 255, 255, 0.5)' }}>JOURNEY PROGRESS:</span>
-            <span style={{ color: '#FF8533', fontWeight: '900', fontSize: '0.9rem' }}>
-              {Math.min(100, Math.round(scrollProgress))}%
-            </span>
-          </div>
-        </div>
+        AAVEG 2026 • HAUNTED HOUSES SAGA
       </div>
     </div>
   );
