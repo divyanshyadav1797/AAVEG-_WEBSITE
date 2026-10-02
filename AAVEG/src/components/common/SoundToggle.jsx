@@ -3,7 +3,7 @@ import { Volume2, VolumeX } from 'lucide-react';
 import { toggleAudio, isAudioActive } from '../../utils/sound';
 
 export default function SoundToggle() {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(() => isAudioActive());
 
   const handleToggle = () => {
     const newState = toggleAudio();

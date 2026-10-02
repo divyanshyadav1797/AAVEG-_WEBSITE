@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, RotateCcw, Volume2, VolumeX, Trophy, Sparkles, Flame } from 'lucide-react';
+import { X, RotateCcw, Volume2, VolumeX, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 /**

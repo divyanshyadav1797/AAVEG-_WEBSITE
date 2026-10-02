@@ -1,9 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Trophy, Gamepad2, Music, ExternalLink, CheckCircle, Shield } from 'lucide-react';
+import { ArrowLeft, Trophy, Gamepad2, Music, ExternalLink, CheckCircle } from 'lucide-react';
 import { HOUSES } from '../data/registration';
-import GlassContainer from '../components/common/GlassContainer';
-import Button from '../components/common/Button';
 import CardSpotlight from '../components/ui/CardSpotlight';
 import BackgroundBeams from '../components/ui/BackgroundBeams';
 import Meteors from '../components/ui/Meteors';

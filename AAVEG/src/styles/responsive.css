@@ -143,14 +143,12 @@
     padding-bottom: 2rem !important;
   }
 
-  /* Ensure tap targets are at least 44px */
-  button, a {
+  /* Ensure primary tap targets are accessible */
+  .aaveg-btn, 
+  button:not(.inline-btn),
+  nav button, 
+  nav a {
     min-height: 44px;
-    min-width: 44px;
-  }
-
-  nav button, nav a {
-    min-height: 40px;
   }
 }
 

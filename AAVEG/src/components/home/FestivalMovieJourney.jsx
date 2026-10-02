@@ -4,20 +4,15 @@ import {
   Sparkles,
   MapPin,
   Clock,
-  Radio,
   Trophy,
   Shield,
   ArrowRight,
   Calendar,
-  Film,
   Compass,
 } from 'lucide-react';
-import GlassContainer from '../common/GlassContainer';
 import Button from '../common/Button';
 import CardSpotlight from '../ui/CardSpotlight';
 import MovingBorder from '../ui/MovingBorder';
-import GlitchText from '../ui/GlitchText';
-import TextGenerateEffect from '../ui/TextGenerateEffect';
 import Lamp from '../ui/Lamp';
 import Magnetic from '../ui/Magnetic';
 import FloatingElements from '../ui/FloatingElements';

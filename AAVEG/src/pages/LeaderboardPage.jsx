@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Trophy, Crown, Flame } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import HostelWars from '../components/home/HostelWars';
 import GridBackground from '../components/ui/GridBackground';
 import ShinyText from '../components/ui/ShinyText';
 import Magnetic from '../components/ui/Magnetic';
-import FloatingElements from '../components/ui/FloatingElements';
 
 export default function LeaderboardPage() {
   return (

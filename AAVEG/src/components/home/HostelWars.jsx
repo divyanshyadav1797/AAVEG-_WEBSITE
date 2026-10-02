@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Trophy, Crown, Flame, Clock, BarChart3, TrendingUp, Sparkles, Shield } from 'lucide-react';
+import { Trophy, Crown, Clock, BarChart3, TrendingUp, Shield } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
 import Button from '../common/Button';
-import CardSpotlight from '../ui/CardSpotlight';
 import BackgroundBeams from '../ui/BackgroundBeams';
 import Meteors from '../ui/Meteors';
 import MovingBorder from '../ui/MovingBorder';
-import Magnetic from '../ui/Magnetic';
 import ShinyText from '../ui/ShinyText';
 import GridBackground from '../ui/GridBackground';
 import { HOUSES } from '../../data/registration';
@@ -95,7 +93,7 @@ export default function HostelWars() {
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 10, maxWidth: '1240px', margin: '0 auto', padding: '0 1.25rem' }}>
-        
+
         {/* Title */}
         <SectionTitle
           tagline="THE ROYAL CLASH"
@@ -583,7 +581,7 @@ export default function HostelWars() {
           )}
 
           {/* Bottom Code-Editing Notice */}
-          <div
+          {/* <div
             style={{
               marginTop: '2rem',
               padding: '12px 18px',
@@ -608,7 +606,7 @@ export default function HostelWars() {
             <span style={{ color: '#FFD166', fontWeight: '700' }}>
               LEADER: {leaderHouse.name} ({leaderHouse.points} PTS)
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* Enter Arena CTA */}

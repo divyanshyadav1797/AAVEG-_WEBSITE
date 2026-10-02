@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, Play, Trophy, Sparkles, Shield, Flame, Skull } from 'lucide-react';
+import { Play, Trophy, Shield } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
 import CardSpotlight from '../ui/CardSpotlight';
 import GridBackground from '../ui/GridBackground';
@@ -30,6 +30,13 @@ export default function AavegGamesSection() {
 
   useEffect(() => {
     refreshHighScores();
+    if (activeGame) {
+      const orig = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = orig;
+      };
+    }
   }, [activeGame]);
 
   return (

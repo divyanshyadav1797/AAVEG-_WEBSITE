@@ -1,4 +1,4 @@
-import React, { useState, Children, cloneElement } from 'react';
+import React, { useState, Children } from 'react';
 
 /**
  * Aceternity UI & React Bits - FocusCards Component

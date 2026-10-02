@@ -7,7 +7,7 @@ import React from 'react';
 export default function GridBackground({
   children,
   className = '',
-  pattern = 'grid', // 'grid' | 'dots'
+  pattern = 'grid', // 'grid' | 'dots' | 'cross'
   color = 'rgba(255, 77, 0, 0.08)',
   maskRadius = '60%',
   style = {},
@@ -15,9 +15,32 @@ export default function GridBackground({
   const bgSvg =
     pattern === 'dots'
       ? `radial-gradient(${color} 1px, transparent 1px)`
+      : pattern === 'cross'
+      ? `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`
       : `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`;
 
   const bgSize = pattern === 'dots' ? '24px 24px' : '40px 40px';
+
+  // If used self-closing as a background layer, render absolute inset-0
+  if (!children) {
+    return (
+      <div
+        className={`pointer-events-none absolute inset-0 ${className}`}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: bgSvg,
+          backgroundSize: bgSize,
+          maskImage: `radial-gradient(ellipse at center, black 25%, transparent ${maskRadius})`,
+          WebkitMaskImage: `radial-gradient(ellipse at center, black 25%, transparent ${maskRadius})`,
+          pointerEvents: 'none',
+          zIndex: 0,
+          ...style,
+        }}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <div
@@ -35,11 +58,12 @@ export default function GridBackground({
           inset: 0,
           backgroundImage: bgSvg,
           backgroundSize: bgSize,
-          maskImage: `radial-gradient(ellipse at center, black 20%, transparent ${maskRadius})`,
-          WebkitMaskImage: `radial-gradient(ellipse at center, black 20%, transparent ${maskRadius})`,
+          maskImage: `radial-gradient(ellipse at center, black 25%, transparent ${maskRadius})`,
+          WebkitMaskImage: `radial-gradient(ellipse at center, black 25%, transparent ${maskRadius})`,
           pointerEvents: 'none',
           zIndex: 0,
         }}
+        aria-hidden="true"
       />
 
       {/* Children Content */}
@@ -49,3 +73,4 @@ export default function GridBackground({
     </div>
   );
 }
+

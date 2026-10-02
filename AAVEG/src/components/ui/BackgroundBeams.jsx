@@ -42,7 +42,7 @@ export default function BackgroundBeams({ className = '', color = '#FF3B00' }) {
         </g>
         
         {/* Ambient Center Glow */}
-        <circle cx="720" cy="450" r="300" fill={color} fillOpacity="0.06" filter="blur(80px)" />
+        <circle cx="720" cy="450" r="300" fill={color} fillOpacity="0.06" style={{ filter: 'blur(80px)' }} />
       </svg>
     </div>
   );

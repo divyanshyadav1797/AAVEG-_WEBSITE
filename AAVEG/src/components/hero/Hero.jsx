@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Users, Play, ChevronDown, Shield, Sparkles } from 'lucide-react';
+import { Calendar, MapPin, Users, Play, ChevronDown, Shield } from 'lucide-react';
 import HeroBackground from './HeroBackground';
 import Button from '../common/Button';
 import AavegHorrorText from './AavegHorrorText';
@@ -184,7 +184,7 @@ export default function Hero({ onOpenTeaser }) {
             </Button>
           </Magnetic>
 
-          {/* Experience The Movie with Magnetic pull */}
+          {/* Experience The Movie with Magnetic pull
           <Magnetic strength={0.2}>
             <Button
               onClick={() => {
@@ -197,7 +197,7 @@ export default function Hero({ onOpenTeaser }) {
             >
               THE MOVIE SAGA
             </Button>
-          </Magnetic>
+          </Magnetic> */}
         </div>
 
         {/* Scroll To Explore Indicator */}

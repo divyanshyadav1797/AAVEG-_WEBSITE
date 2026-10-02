@@ -48,7 +48,7 @@ export default function Header() {
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          
+
           {/* Dedicated Replaceable College Logo Area */}
           <Link
             to="/"
@@ -82,7 +82,7 @@ export default function Header() {
                   if (fallback) fallback.style.display = 'flex';
                 }}
               />
-              
+
               <div
                 className="logo-fallback"
                 style={{ display: 'none', flexDirection: 'column', justifyContent: 'center' }}

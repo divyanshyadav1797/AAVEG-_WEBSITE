@@ -27,7 +27,7 @@ export default function Spotlight({
         animation: 'spotlightSweep 10s ease-in-out infinite alternate',
       }}
     >
-      <g filter="url(#filter)">
+      <g filter="url(#spotlight-blur-filter)">
         <ellipse
           cx="1924.71"
           cy="273.501"
@@ -40,7 +40,7 @@ export default function Spotlight({
       </g>
       <defs>
         <filter
-          id="filter"
+          id="spotlight-blur-filter"
           x="0.860352"
           y="0.838989"
           width="3785.16"

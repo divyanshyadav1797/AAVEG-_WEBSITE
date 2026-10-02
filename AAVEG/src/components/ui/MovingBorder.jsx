@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 /**
  * Aceternity UI - MovingBorder Component
@@ -7,9 +7,6 @@ import React, { useRef } from 'react';
 export default function MovingBorder({
   children,
   duration = 3500,
-  rx = '30%',
-  ry = '30%',
-  borderClassName = '',
   className = '',
   as: Component = 'div',
   containerClassName = '',

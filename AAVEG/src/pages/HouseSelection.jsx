@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Flame, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, Flame } from 'lucide-react';
 import CircularHouseSelector from '../components/houses/CircularHouseSelector';
 import Spotlight from '../components/ui/Spotlight';
 import BackgroundBeams from '../components/ui/BackgroundBeams';

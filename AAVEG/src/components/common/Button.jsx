@@ -115,69 +115,46 @@ export default function Button({
     </>
   );
 
-  const hoverStyle = `
-    .aaveg-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 77, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
-      border-color: rgba(255, 110, 40, 0.95) !important;
-    }
-    .aaveg-btn:hover .btn-shimmer {
-      left: 200%;
-    }
-    .aaveg-btn:active {
-      transform: translateY(1px);
-    }
-  `;
-
   if (to) {
     return (
-      <>
-        <style>{hoverStyle}</style>
-        <Link
-          to={to}
-          className={`aaveg-btn interactive-cursor ${className}`}
-          style={mergedStyles}
-          onClick={handleClick}
-          {...props}
-        >
-          {content}
-        </Link>
-      </>
-    );
-  }
-
-  if (href) {
-    return (
-      <>
-        <style>{hoverStyle}</style>
-        <a
-          href={href}
-          className={`aaveg-btn interactive-cursor ${className}`}
-          style={mergedStyles}
-          onClick={handleClick}
-          target="_blank"
-          rel="noopener noreferrer"
-          {...props}
-        >
-          {content}
-        </a>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <style>{hoverStyle}</style>
-      <button
-        type="button"
-        disabled={disabled}
+      <Link
+        to={to}
         className={`aaveg-btn interactive-cursor ${className}`}
         style={mergedStyles}
         onClick={handleClick}
         {...props}
       >
         {content}
-      </button>
-    </>
+      </Link>
+    );
+  }
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={`aaveg-btn interactive-cursor ${className}`}
+        style={mergedStyles}
+        onClick={handleClick}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...props}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      className={`aaveg-btn interactive-cursor ${className}`}
+      style={mergedStyles}
+      onClick={handleClick}
+      {...props}
+    >
+      {content}
+    </button>
   );
 }

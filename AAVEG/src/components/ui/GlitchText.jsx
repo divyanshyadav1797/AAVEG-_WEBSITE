@@ -11,10 +11,10 @@ export default function GlitchText({
   className = '',
   style = {},
   // Unused animation props retained for API backwards compatibility
-  speed,
-  maxIterations,
-  characters,
-  triggerOnHover,
+  speed: _speed,
+  maxIterations: _maxIterations,
+  characters: _characters,
+  triggerOnHover: _triggerOnHover,
   ...props
 }) {
   const content = text !== undefined ? text : children;

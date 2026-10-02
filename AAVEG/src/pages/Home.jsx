@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Film, Sparkles } from 'lucide-react';
 import Hero from '../components/hero/Hero';
 import FestivalMovieJourney from '../components/home/FestivalMovieJourney';
@@ -12,65 +12,18 @@ import ThreeScrollExperience from '../components/home/ThreeScrollExperience';
  * and culminates in the Horror Games Arcade.
  */
 export default function Home() {
-  const [pageProgress, setPageProgress] = useState(0);
-  const [scrollVelocity, setScrollVelocity] = useState(0);
-  const [activeSector, setActiveSector] = useState(0);
   const [isTeaserOpen, setIsTeaserOpen] = useState(false);
 
-  const lastScrollYRef = useRef(0);
-
-  // Global Page Scroll Listener with Velocity Damping
+  // Lock body scroll when cinematic teaser modal is open
   useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
-
-          setPageProgress(pct);
-
-          // Calculate instantaneous scroll velocity
-          const delta = Math.abs(scrollY - lastScrollYRef.current);
-          lastScrollYRef.current = scrollY;
-          setScrollVelocity(delta);
-
-          // Sector breakdown across full page
-          if (pct < 14) {
-            setActiveSector(0); // Hero
-          } else if (pct < 32) {
-            setActiveSector(1); // Act 1: The Awakening
-          } else if (pct < 54) {
-            setActiveSector(2); // Act 2: The 4 Nights
-          } else if (pct < 74) {
-            setActiveSector(3); // Act 3: 8 Houses
-          } else if (pct < 88) {
-            setActiveSector(4); // Act 4: The Final Arena
-          } else {
-            setActiveSector(5); // Horror Arcade Mini-Games
-          }
-
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    // Smoothly decay velocity when scroll stops
-    const decayInterval = setInterval(() => {
-      setScrollVelocity((prev) => (prev > 0.5 ? prev * 0.82 : 0));
-    }, 50);
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(decayInterval);
-    };
-  }, []);
+    if (isTeaserOpen) {
+      const orig = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = orig;
+      };
+    }
+  }, [isTeaserOpen]);
 
   return (
     <div
@@ -82,12 +35,8 @@ export default function Home() {
         color: '#FFFFFF',
       }}
     >
-      {/* 00. Global Full-Page Three.js Scroll Engine inspired by re-the-drive */}
-      <ThreeScrollExperience
-        scrollProgress={pageProgress}
-        scrollVelocity={scrollVelocity}
-        activeSector={activeSector}
-      />
+      {/* 00. Global Full-Page Three.js Scroll Engine */}
+      <ThreeScrollExperience />
 
       {/* 01. The Uppermost Part: Master Cinematic Hero matching authentic media title */}
       <div style={{ position: 'relative', zIndex: 10 }}>

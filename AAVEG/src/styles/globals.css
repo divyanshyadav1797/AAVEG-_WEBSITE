@@ -1,9 +1,6 @@
 @import './variables.css';
 @import './animations.css';
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Nosifer&family=Creepster&family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
 /* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -158,8 +155,8 @@ body {
 .noise-overlay {
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 999;
   opacity: 0.025;
@@ -262,6 +259,21 @@ button {
 button:focus-visible, a:focus-visible {
   outline: 2px solid var(--accent-bright);
   outline-offset: 3px;
+}
+
+/* AAVEG Button Component Styles */
+.aaveg-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 77, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(255, 110, 40, 0.95) !important;
+}
+
+.aaveg-btn:hover .btn-shimmer {
+  left: 200% !important;
+}
+
+.aaveg-btn:active {
+  transform: translateY(1px);
 }
 
 /* Accessibility */

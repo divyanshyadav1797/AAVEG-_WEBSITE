@@ -114,7 +114,7 @@ export const playGothicChime = () => {
 
     osc.start(now);
     osc.stop(now + 1.3);
-  } catch (e) {
+  } catch {
     // Suppress silently if user hasn't interacted with audio yet
   }
 };

@@ -15,25 +15,29 @@ import { createRealisticPumpkinModel } from '../../utils/realisticPumpkin';
  * - Zero ball particles or noisy clutter in the middle of the screen.
  * - Subtle, soft depth-of-field blur so foreground festival cards and text remain 100% crisp.
  */
-export default function ThreeScrollExperience({
-  scrollProgress = 0, // 0 to 100
-  scrollVelocity = 0,
-}) {
+export default function ThreeScrollExperience() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
-  const progressRef = useRef(scrollProgress);
-  const velocityRef = useRef(scrollVelocity);
+  const progressRef = useRef(0);
   const isVisibleRef = useRef(true);
 
-  // Sync scroll values without re-rendering component
+  // Directly track page scroll without forcing React parent component re-renders
   useEffect(() => {
-    progressRef.current = scrollProgress / 100;
-  }, [scrollProgress]);
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const p = docHeight > 0 ? Math.min(1, Math.max(0, scrollY / docHeight)) : 0;
+      progressRef.current = p;
+      if (containerRef.current) {
+        containerRef.current.style.opacity = Math.min(0.88, 0.4 + (p * 5) * 0.48);
+      }
+    };
 
-  useEffect(() => {
-    velocityRef.current = scrollVelocity;
-  }, [scrollVelocity]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Subtle mouse parallax
   useEffect(() => {
@@ -371,15 +375,13 @@ export default function ThreeScrollExperience({
       ref={containerRef}
       style={{
         position: 'fixed',
-        inset: '-10px',
-        width: 'calc(100vw + 20px)',
-        height: 'calc(100vh + 20px)',
-        filter: 'blur(1.8px)', // Soft cinematic depth-of-field
-        transform: 'scale(1.01)',
+        inset: 0,
+        width: '100%',
+        height: '100%',
         pointerEvents: 'none',
         zIndex: 1, // Deep behind all foreground content
         overflow: 'hidden',
-        opacity: Math.min(0.88, 0.4 + (scrollProgress / 20) * 0.48),
+        opacity: 0.4,
         transition: 'opacity 0.3s ease-out',
       }}
       aria-hidden="true"

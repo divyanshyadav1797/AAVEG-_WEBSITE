@@ -122,6 +122,10 @@ export default function AavegHorrorText() {
         <img
           src={aavegTitleLogo}
           alt="AAVEG - The Hostel Fest"
+          width="1962"
+          height="801"
+          fetchPriority="high"
+          decoding="async"
           className="aaveg-hero-title-artwork"
           style={{
             position: 'relative',

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Skull, MapPin, Calendar, Shield, Trophy } from 'lucide-react';
 import { InstagramIcon, LinkedinIcon, YoutubeIcon } from '../common/SocialIcons';
-import { navLinks, primaryCTA } from '../../data/navigation';
+import { navLinks } from '../../data/navigation';
 import collegeLogo from '../../assets/logos/college-logo.png';
 import Button from '../common/Button';
 import Magnetic from '../ui/Magnetic';
@@ -237,7 +237,7 @@ export default function Footer() {
             <div style={{ display: 'flex', gap: '12px', marginBottom: '1.5rem' }}>
               <Magnetic strength={0.35}>
                 <a
-                  href="https://instagram.com/aaveg_pce"
+                  href="https://www.instagram.com/aaveg_poornima/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -285,7 +285,7 @@ export default function Footer() {
 
               <Magnetic strength={0.35}>
                 <a
-                  href="https://youtube.com/@poornimacollege"
+                  href="https://www.youtube.com/@PoornimaUniversityTV"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Shield, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { HOUSES } from '../../data/registration';
-import Button from '../common/Button';
 import SparklesCore from '../ui/SparklesCore';
-import Meteors from '../ui/Meteors';
 import MovingBorder from '../ui/MovingBorder';
 import GlitchText from '../ui/GlitchText';
 import Magnetic from '../ui/Magnetic';
@@ -17,7 +15,6 @@ export default function CircularHouseSelector({ onSelectHouse }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [rotationAngle, setRotationAngle] = useState(0);
   const containerRef = useRef(null);
-  const isDragging = useRef(false);
   const startX = useRef(0);
 
   const totalHouses = HOUSES.length;
