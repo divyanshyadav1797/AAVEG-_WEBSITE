@@ -15,8 +15,6 @@ import {
 import GlassContainer from '../common/GlassContainer';
 import Button from '../common/Button';
 import CardSpotlight from '../ui/CardSpotlight';
-import BackgroundBeams from '../ui/BackgroundBeams';
-import Meteors from '../ui/Meteors';
 import MovingBorder from '../ui/MovingBorder';
 import GlitchText from '../ui/GlitchText';
 import TextGenerateEffect from '../ui/TextGenerateEffect';
@@ -288,9 +286,7 @@ export default function FestivalMovieJourney() {
           background: 'radial-gradient(ellipse at 50% 30%, rgba(200, 45, 0, 0.08) 0%, transparent 65%)',
         }}
       >
-        {/* Aceternity UI - Volumetric Horror Beams & Geometric Tech Grid */}
-        <BackgroundBeams color="#FF3B00" />
-        <GridBackground color="rgba(255, 77, 0, 0.06)" maskRadius="65%">
+        <GridBackground color="rgba(255, 77, 0, 0.05)" maskRadius="65%">
 
         <div className="container relative z-10" style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 10 }}>
           {/* Act Badge with Annnimate Floating motion */}
@@ -440,9 +436,6 @@ export default function FestivalMovieJourney() {
           background: 'radial-gradient(ellipse at 50% 50%, rgba(255, 120, 0, 0.06) 0%, transparent 70%)',
         }}
       >
-        {/* Aceternity UI - Falling Ember Meteors */}
-        <Meteors number={12} color="#FFA04D" />
-
         <div className="container relative z-10" style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <div
@@ -799,10 +792,6 @@ export default function FestivalMovieJourney() {
           background: 'radial-gradient(ellipse at 50% 50%, rgba(255, 59, 0, 0.12) 0%, transparent 65%)',
         }}
       >
-        {/* Aceternity UI - Atmospheric Background Beams & Embers */}
-        <BackgroundBeams color="#FF4D00" />
-        <Meteors number={16} color="#FF3B00" />
-
         {/* Aceternity UI - Radiant Cone Lamp Lighting Effect */}
         <Lamp color="#FF3B00" secondaryColor="#FFA04D">
           <div className="container relative z-10" style={{ maxWidth: '1020px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 10 }}>

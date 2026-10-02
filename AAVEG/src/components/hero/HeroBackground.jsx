@@ -5,6 +5,7 @@ import Bats from './Bats';
 import Fog from './Fog';
 import FloatingParticles from './FloatingParticles';
 import HauntedEnvironment from './HauntedEnvironment';
+import Pumpkin from './Pumpkin';
 
 export default function HeroBackground({
   moonRef,
@@ -64,6 +65,9 @@ export default function HeroBackground({
 
       {/* Layer 12: Rising Fire Embers Particles */}
       <FloatingParticles count={38} />
+
+      {/* Layer 13: Realistic 3D Jack-o'-Lantern in Mist */}
+      <Pumpkin />
 
       {/* Layer 14: Dark Vignette Gradient */}
       <div

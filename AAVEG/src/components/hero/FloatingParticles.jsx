@@ -72,19 +72,13 @@ export default function FloatingParticles({ count = 28 }) {
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
 
-        const currentOpacity = p.opacity * (0.6 + 0.4 * Math.sin(p.pulseVal));
+        const currentOpacity = p.opacity * (0.5 + 0.5 * Math.sin(p.pulseVal));
 
-        // High performance glowing ember without CPU shadowBlur
+        // Subtle elongated ash fleck (not a round ball)
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 1.8, 0, Math.PI * 2);
+        ctx.ellipse(p.x, p.y, p.size * 0.7, p.size * 1.5, 0.4, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = Math.max(0, Math.min(1, currentOpacity * 0.35));
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = '#FFFFFF';
-        ctx.globalAlpha = Math.max(0, Math.min(1, currentOpacity));
+        ctx.globalAlpha = Math.max(0, Math.min(0.35, currentOpacity * 0.35));
         ctx.fill();
       }
 

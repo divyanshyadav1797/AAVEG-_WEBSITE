@@ -4,8 +4,6 @@ import HeroBackground from './HeroBackground';
 import Button from '../common/Button';
 import AavegHorrorText from './AavegHorrorText';
 import Spotlight from '../ui/Spotlight';
-import SparklesCore from '../ui/SparklesCore';
-import Meteors from '../ui/Meteors';
 import MovingBorder from '../ui/MovingBorder';
 import GlitchText from '../ui/GlitchText';
 import ShinyText from '../ui/ShinyText';
@@ -30,9 +28,6 @@ export default function Hero({ onOpenTeaser }) {
     >
       {/* Aceternity UI - Sweeping Theatrical Horror Spotlight */}
       <Spotlight fill="#FF3B00" opacity={0.28} />
-
-      {/* Aceternity UI - Shooting Ember Meteors */}
-      <Meteors number={8} color="#FF7A32" />
 
       {/* Cinematic Horror Atmospheric Background (Moon, Clouds, Gothic Monolith silhouette, Fog, Bats, Embers) */}
       <HeroBackground />

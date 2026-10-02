@@ -74,6 +74,70 @@
   }
 }
 
+/* Subtle cinematic bats swooping over the title on initial entrance */
+@keyframes batEntranceSwoop1 {
+  0% {
+    transform: translate3d(-180px, 90px, 40px) scale(0.65) rotate(-22deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  50% {
+    transform: translate3d(80px, -20px, 70px) scale(1.05) rotate(4deg);
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(360px, -130px, 30px) scale(0.6) rotate(22deg);
+    opacity: 0;
+  }
+}
+
+@keyframes batEntranceSwoop2 {
+  0% {
+    transform: translate3d(-220px, 50px, 50px) scale(0.75) rotate(-18deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  52% {
+    transform: translate3d(10px, -35px, 80px) scale(1.18) rotate(6deg);
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(320px, -150px, 35px) scale(0.65) rotate(26deg);
+    opacity: 0;
+  }
+}
+
+@keyframes batEntranceSwoop3 {
+  0% {
+    transform: translate3d(-140px, 120px, 45px) scale(0.55) rotate(-25deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  50% {
+    transform: translate3d(140px, 5px, 60px) scale(0.95) rotate(2deg);
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(400px, -110px, 25px) scale(0.5) rotate(18deg);
+    opacity: 0;
+  }
+}
+
 @keyframes pumpkinFlicker {
   0%, 100% {
     opacity: 1;
