@@ -28,7 +28,7 @@ export default function TextGenerateEffect({
     }, delay * 1000);
 
     return () => clearInterval(interval);
-  }, [words, delay]);
+  }, [words, delay, wordsArray.length]);
 
   return (
     <div

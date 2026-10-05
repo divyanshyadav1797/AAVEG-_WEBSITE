@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Flame } from 'lucide-react';
+import { ArrowLeft, Flame, Film, Gamepad2 } from 'lucide-react';
 import CircularHouseSelector from '../components/houses/CircularHouseSelector';
 import Spotlight from '../components/ui/Spotlight';
 import BackgroundBeams from '../components/ui/BackgroundBeams';
@@ -47,31 +47,88 @@ export default function HouseSelection() {
       />
 
       <div className="container relative z-10" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
-        {/* Back Link with Magnetic feel */}
-        <Magnetic strength={0.2}>
-          <Link
-            to="/"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              color: 'var(--text-secondary)',
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.85rem',
-              fontWeight: '600',
-              textDecoration: 'none',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              marginBottom: '2rem',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#FF4D00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-          >
-            <ArrowLeft size={16} />
-            <span>BACK TO FESTIVAL SAGA</span>
-          </Link>
-        </Magnetic>
+        {/* Navigation Strip */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '2rem' }}>
+          <Magnetic strength={0.2}>
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--text-secondary)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                textDecoration: 'none',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                background: 'rgba(18, 20, 24, 0.6)',
+                border: '1px solid rgba(255, 77, 0, 0.2)',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#FF4D00')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            >
+              <ArrowLeft size={16} />
+              <span>OVERVIEW</span>
+            </Link>
+          </Magnetic>
+
+          <Magnetic strength={0.2}>
+            <Link
+              to="/movie-saga"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--text-secondary)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                textDecoration: 'none',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                background: 'rgba(18, 20, 24, 0.6)',
+                border: '1px solid rgba(255, 77, 0, 0.2)',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#FF4D00')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            >
+              <Film size={15} />
+              <span>MOVIE SAGA</span>
+            </Link>
+          </Magnetic>
+
+          <Magnetic strength={0.2}>
+            <Link
+              to="/games"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--text-secondary)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                textDecoration: 'none',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                background: 'rgba(18, 20, 24, 0.6)',
+                border: '1px solid rgba(255, 77, 0, 0.2)',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#FF4D00')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+            >
+              <Gamepad2 size={15} />
+              <span>MINI-GAMES</span>
+            </Link>
+          </Magnetic>
+        </div>
 
         {/* Page Header */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>

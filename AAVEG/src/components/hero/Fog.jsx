@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function Fog({ fogRef }) {
+/**
+ * Volumetric Luminous Graveyard Mist
+ * Multi-layer rolling vapor with warm amber moonlight scattering
+ * and deep violet-indigo atmospheric undertones.
+ */
+export default function Fog({ fogRef, style = {} }) {
   return (
     <div
       ref={fogRef}
@@ -10,36 +15,52 @@ export default function Fog({ fogRef }) {
         bottom: 0,
         left: 0,
         width: '100%',
-        height: '60%',
+        height: '48%',
         zIndex: 8,
         pointerEvents: 'none',
         overflow: 'hidden',
+        ...style,
       }}
     >
-      {/* Bottom Dense Mist Ground */}
+      {/* Layer 1: Ground-Hugging Rolling Amber Mist (Moonlight reflection) */}
       <div
         style={{
           position: 'absolute',
           bottom: 0,
           left: '-20%',
-          width: '140%',
-          height: '100%',
-          background: 'radial-gradient(ellipse 80% 50% at 50% 90%, rgba(25, 12, 5, 0.7) 0%, rgba(200, 70, 10, 0.15) 45%, transparent 75%)',
+          width: '145%',
+          height: '85%',
+          background: 'radial-gradient(ellipse 70% 50% at 55% 90%, rgba(255, 95, 15, 0.26) 0%, rgba(180, 45, 10, 0.16) 40%, rgba(35, 15, 25, 0.35) 70%, transparent 90%)',
           filter: 'blur(30px)',
-          animation: 'fogDriftSlow 18s ease-in-out infinite alternate',
+          animation: 'fogDriftSlow 20s ease-in-out infinite alternate',
+          mixBlendMode: 'screen',
         }}
       />
 
-      {/* Floating Fog Wisps Layer 2 */}
+      {/* Layer 2: Rolling Billow Wave (Catching purple-violet sky bounce) */}
       <div
         style={{
           position: 'absolute',
-          bottom: '10%',
-          left: '-10%',
-          width: '120%',
-          height: '45%',
-          background: 'linear-gradient(180deg, transparent 0%, rgba(255, 80, 0, 0.08) 50%, rgba(10, 8, 8, 0.8) 100%)',
-          filter: 'blur(20px)',
+          bottom: '5%',
+          left: '-25%',
+          width: '155%',
+          height: '65%',
+          background: 'radial-gradient(ellipse 65% 40% at 30% 80%, rgba(170, 70, 220, 0.15) 0%, rgba(255, 120, 30, 0.18) 45%, transparent 75%)',
+          filter: 'blur(26px)',
+          animation: 'fogRollDense 15s ease-in-out infinite alternate',
+          mixBlendMode: 'screen',
+        }}
+      />
+
+      {/* Layer 3: Creeping Ground Bed Fade */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          height: '40%',
+          background: 'linear-gradient(to top, rgba(5, 4, 8, 0.95) 0%, rgba(15, 10, 18, 0.6) 50%, transparent 100%)',
         }}
       />
     </div>

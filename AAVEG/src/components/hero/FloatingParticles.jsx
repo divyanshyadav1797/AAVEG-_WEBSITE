@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function FloatingParticles({ count = 28 }) {
+/**
+ * Realistic Fire Embers, Occult Ash Flecks, and Graveyard Spectral Wisps
+ * Simulated with organic upward thermal convection, air turbulence, and cooling decay.
+ */
+export default function FloatingParticles({ count = 42 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +17,6 @@ export default function FloatingParticles({ count = 28 }) {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Pause rendering when offscreen to preserve 60fps on scroll
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
@@ -32,24 +35,35 @@ export default function FloatingParticles({ count = 28 }) {
 
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Particle pool
+    // Particle pool: 85% embers/ash, 15% slow ghostly spectral wisps
     const particles = [];
-    const colors = ['#FF3B00', '#FF5A14', '#FFA04D', '#FFD166', '#C92F15'];
+    const emberTints = [
+      { r: 255, g: 75, b: 0 },
+      { r: 255, g: 125, b: 20 },
+      { r: 255, g: 175, b: 60 },
+      { r: 220, g: 40, b: 10 },
+      { r: 180, g: 30, b: 5 },
+    ];
 
     for (let i = 0; i < count; i++) {
+      const isSpectral = i % 8 === 0;
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 2.2 + 1,
-        speedY: Math.random() * 0.7 + 0.3,
-        speedX: (Math.random() - 0.5) * 0.4,
-        color: colors[Math.floor(Math.random() * colors.length)],
+        isSpectral,
+        size: isSpectral ? Math.random() * 3.5 + 2 : Math.random() * 2.2 + 0.8,
+        speedY: isSpectral ? Math.random() * 0.25 + 0.15 : Math.random() * 0.85 + 0.35,
+        swaySpeed: Math.random() * 0.02 + 0.01,
+        swayAmp: isSpectral ? Math.random() * 1.5 + 0.8 : Math.random() * 0.8 + 0.4,
+        swayPhase: Math.random() * Math.PI * 2,
+        color: isSpectral ? { r: 140, g: 180, b: 255 } : emberTints[Math.floor(Math.random() * emberTints.length)],
         opacity: Math.random() * 0.6 + 0.3,
-        pulseSpeed: Math.random() * 0.03 + 0.015,
-        pulseVal: Math.random() * Math.PI,
+        flickerSpeed: Math.random() * 0.06 + 0.02,
+        flickerPhase: Math.random() * Math.PI * 2,
       });
     }
 
+    let time = 0;
     const render = () => {
       if (!isVisible) {
         animationFrameId = null;
@@ -57,29 +71,47 @@ export default function FloatingParticles({ count = 28 }) {
       }
 
       ctx.clearRect(0, 0, width, height);
+      time += 0.015;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.y -= p.speedY;
-        p.x += p.speedX;
-        p.pulseVal += p.pulseSpeed;
+        p.swayPhase += p.swaySpeed;
+        p.flickerPhase += p.flickerSpeed;
+        p.x += Math.sin(p.swayPhase) * p.swayAmp;
 
-        // Reset if offscreen
-        if (p.y < -10) {
-          p.y = height + 10;
+        // Reset particle when it floats past screen top
+        if (p.y < -20) {
+          p.y = height + 20;
           p.x = Math.random() * width;
         }
-        if (p.x < -10) p.x = width + 10;
-        if (p.x > width + 10) p.x = -10;
+        if (p.x < -20) p.x = width + 20;
+        if (p.x > width + 20) p.x = -20;
 
-        const currentOpacity = p.opacity * (0.5 + 0.5 * Math.sin(p.pulseVal));
+        const flicker = 0.5 + 0.5 * Math.sin(p.flickerPhase);
+        const currentAlpha = p.opacity * flicker;
 
-        // Subtle elongated ash fleck (not a round ball)
-        ctx.beginPath();
-        ctx.ellipse(p.x, p.y, p.size * 0.7, p.size * 1.5, 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = Math.max(0, Math.min(0.35, currentOpacity * 0.35));
-        ctx.fill();
+        ctx.save();
+        if (p.isSpectral) {
+          // Ghostly Will-o'-the-wisp orb with soft radial aura
+          const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
+          grad.addColorStop(0, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${currentAlpha * 0.7})`);
+          grad.addColorStop(0.5, `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${currentAlpha * 0.2})`);
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          // Realistic elongated burning ember fleck
+          ctx.beginPath();
+          ctx.ellipse(p.x, p.y, p.size * 0.6, p.size * 1.4, Math.sin(time + i) * 0.4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${currentAlpha * 0.85})`;
+          ctx.shadowColor = `rgb(${p.color.r}, ${p.color.g}, ${p.color.b})`;
+          ctx.shadowBlur = 6;
+          ctx.fill();
+        }
+        ctx.restore();
       }
 
       animationFrameId = requestAnimationFrame(render);
@@ -109,4 +141,3 @@ export default function FloatingParticles({ count = 28 }) {
     />
   );
 }
-

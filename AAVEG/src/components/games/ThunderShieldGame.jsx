@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, Shield, Zap, RotateCcw, Volume2, VolumeX, Trophy, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -43,7 +43,7 @@ export default function ThunderShieldGame({ onClose }) {
   }, [highScore]);
 
   // Audio synthesize with Web Audio API for zero-dependency retro sounds
-  const playSound = (type) => {
+  const playSound = useCallback((type) => {
     if (!soundEnabled) return;
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -90,7 +90,7 @@ export default function ThunderShieldGame({ onClose }) {
     } catch {
       // AudioContext fallback
     }
-  };
+  }, [soundEnabled]);
 
   // Start / Restart Game
   const startGame = () => {
@@ -477,7 +477,7 @@ export default function ThunderShieldGame({ onClose }) {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [gameState, soundEnabled]);
+  }, [gameState, soundEnabled, playSound]);
 
   return (
     <div

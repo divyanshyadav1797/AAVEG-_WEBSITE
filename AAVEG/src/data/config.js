@@ -10,10 +10,10 @@ export const FESTIVAL_CONFIG = {
   dates: '28th – 30th October 2026',
   hashtag: '#Aaveg2026',
   slogan: 'SOME NIGHTS HAUNT FOREVER.',
-  
-  // Official External Google Form for Registrations (No internal form)
-  googleFormUrl: 'https://forms.gle/aaveg2026hostelfest',
-  
+
+  // // Official External Google Form for Registrations (No internal form)
+  // googleFormUrl: 'https://forms.gle/aaveg2026hostelfest',
+
   // Social Media Links
   socials: {
     instagram: 'https://instagram.com/aaveg_pce',

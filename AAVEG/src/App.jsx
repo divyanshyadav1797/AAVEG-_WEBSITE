@@ -3,6 +3,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
+import MovieSagaPage from './pages/MovieSagaPage';
+import GamesPage from './pages/GamesPage';
 import HouseSelection from './pages/HouseSelection';
 import HouseActivities from './pages/HouseActivities';
 import LeaderboardPage from './pages/LeaderboardPage';
@@ -40,6 +42,10 @@ export default function App() {
       <main style={{ width: '100%' }}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/movie-saga" element={<MovieSagaPage />} />
+          <Route path="/saga" element={<MovieSagaPage />} />
+          <Route path="/games" element={<GamesPage />} />
+          <Route path="/arcade" element={<GamesPage />} />
           <Route path="/houses" element={<HouseSelection />} />
           <Route path="/house/:houseId" element={<HouseActivities />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />

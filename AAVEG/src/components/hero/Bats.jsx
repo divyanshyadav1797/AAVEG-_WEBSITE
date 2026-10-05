@@ -1,45 +1,49 @@
 import React from 'react';
 
-// Single Bat Silhouette with flapping wings
-function Bat({ size = 32, className = '', style = {}, flapDuration = '0.6s' }) {
+/**
+ * Anatomically accurate horror bat silhouette with curved wing bones,
+ * thumb claw, scalloped membrane, and demonic head.
+ */
+function RealisticBat({ size = 36, flapDuration = '0.45s', style = {} }) {
   return (
     <svg
       width={size}
-      height={size * 0.55}
-      viewBox="0 0 100 55"
-      fill="#0A0908"
-      className={className}
+      height={size * 0.58}
+      viewBox="0 0 100 58"
+      fill="#050406"
       style={{
-        filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.8))',
+        filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9))',
         ...style,
       }}
     >
-      {/* Bat Wings with Flap CSS animation */}
+      {/* Dynamic Flapping Wings */}
       <path
-        d="M 50 35 
-           C 55 20, 70 5, 95 12 
-           C 85 22, 80 38, 75 48 
-           C 65 38, 55 42, 50 35 
-           C 45 42, 35 38, 25 48 
-           C 20 38, 15 22, 5 12 
-           C 30 5, 45 20, 50 35 Z"
+        d="M 50 38
+           C 54 26, 68 12, 88 16
+           C 95 18, 99 24, 94 30
+           C 87 27, 80 34, 76 42
+           C 71 36, 64 39, 58 48
+           C 54 44, 52 41, 50 38
+           C 48 41, 46 44, 42 48
+           C 36 39, 29 36, 24 42
+           C 20 34, 13 27, 6 30
+           C 1 24, 5 18, 12 16
+           C 32 12, 46 26, 50 38 Z"
         style={{
-          transformOrigin: '50% 35%',
+          transformOrigin: '50% 38%',
           animation: `batFlap ${flapDuration} ease-in-out infinite`,
         }}
       />
-      {/* Bat Head & Ears */}
-      <polygon points="46,26 50,18 54,26" />
-      <polygon points="43,24 45,16 48,22" />
-      <polygon points="52,22 55,16 57,24" />
-      {/* Tiny demonic eye dots */}
-      <circle cx="48" cy="24" r="1" fill="#FF4D00" />
-      <circle cx="52" cy="24" r="1" fill="#FF4D00" />
+      {/* Bat Head & Pointed Gothic Ears */}
+      <path d="M 45 32 L 42 21 L 46 26 L 50 24 L 54 26 L 58 21 L 55 32 Z" fill="#030204" />
+      {/* Reflective glowing eye pins */}
+      <circle cx="47" cy="27" r="1.1" fill="#FF4D00" />
+      <circle cx="53" cy="27" r="1.1" fill="#FF4D00" />
     </svg>
   );
 }
 
-export default function Bats({ batsRef }) {
+export default function Bats({ batsRef, style = {} }) {
   return (
     <div
       ref={batsRef}
@@ -50,48 +54,81 @@ export default function Bats({ batsRef }) {
         zIndex: 11,
         pointerEvents: 'none',
         overflow: 'hidden',
+        ...style,
       }}
     >
-      {/* Bat 1: Near Moon right side */}
-      <div style={{ position: 'absolute', top: '16%', right: '24%', transform: 'scale(1.2) rotate(-12deg)' }}>
-        <Bat size={44} flapDuration="0.45s" />
+      {/* DISTANT FLOCK SWARMING AROUND CLOCKTOWER (Depth plane 1) */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '18%',
+          left: '42%',
+          width: '180px',
+          height: '140px',
+          opacity: 0.68,
+        }}
+      >
+        <div style={{ position: 'absolute', top: '15%', left: '20%', transform: 'scale(0.38) rotate(-18deg)' }}>
+          <RealisticBat size={24} flapDuration="0.32s" />
+        </div>
+        <div style={{ position: 'absolute', top: '35%', left: '55%', transform: 'scale(0.42) rotate(12deg)' }}>
+          <RealisticBat size={24} flapDuration="0.36s" />
+        </div>
+        <div style={{ position: 'absolute', top: '65%', left: '30%', transform: 'scale(0.35) rotate(-8deg)' }}>
+          <RealisticBat size={22} flapDuration="0.3s" />
+        </div>
+        <div style={{ position: 'absolute', top: '45%', left: '80%', transform: 'scale(0.4) rotate(24deg)' }}>
+          <RealisticBat size={25} flapDuration="0.34s" />
+        </div>
+        <div style={{ position: 'absolute', top: '8%', left: '70%', transform: 'scale(0.32) rotate(-14deg)' }}>
+          <RealisticBat size={22} flapDuration="0.29s" />
+        </div>
       </div>
 
-      {/* Bat 2: Flying near moon top */}
-      <div style={{ position: 'absolute', top: '11%', right: '14%', transform: 'scale(0.85) rotate(18deg)' }}>
-        <Bat size={32} flapDuration="0.55s" />
+      {/* MIDGROUND BATS PATROLLING ACROSS BLOOD MOON (Depth plane 2) */}
+      <div style={{ position: 'absolute', top: '14%', right: '22%', transform: 'scale(1.1) rotate(-14deg)' }}>
+        <RealisticBat size={42} flapDuration="0.44s" />
       </div>
 
-      {/* Bat 3: Midground center flight */}
-      <div style={{ position: 'absolute', top: '22%', right: '35%', transform: 'scale(1) rotate(-6deg)' }}>
-        <Bat size={38} flapDuration="0.48s" />
+      <div style={{ position: 'absolute', top: '9%', right: '13%', transform: 'scale(0.85) rotate(16deg)' }}>
+        <RealisticBat size={34} flapDuration="0.52s" />
       </div>
 
-      {/* Bat 4: Distant small bat */}
-      <div style={{ position: 'absolute', top: '28%', right: '18%', transform: 'scale(0.6) rotate(15deg)', opacity: 0.7 }}>
-        <Bat size={26} flapDuration="0.65s" />
+      <div style={{ position: 'absolute', top: '23%', right: '31%', transform: 'scale(0.95) rotate(-6deg)' }}>
+        <RealisticBat size={38} flapDuration="0.46s" />
       </div>
 
-      {/* Bat 5: Left sky distant bat */}
-      <div style={{ position: 'absolute', top: '19%', left: '22%', transform: 'scale(0.7) rotate(-22deg)', opacity: 0.8 }}>
-        <Bat size={30} flapDuration="0.52s" />
+      <div style={{ position: 'absolute', top: '12%', left: '32%', transform: 'scale(0.8) rotate(12deg)' }}>
+        <RealisticBat size={32} flapDuration="0.48s" />
       </div>
 
-      {/* Bat 6: Left high bat */}
-      <div style={{ position: 'absolute', top: '12%', left: '38%', transform: 'scale(0.9) rotate(8deg)' }}>
-        <Bat size={36} flapDuration="0.42s" />
+      <div style={{ position: 'absolute', top: '20%', left: '18%', transform: 'scale(0.7) rotate(-22deg)', opacity: 0.85 }}>
+        <RealisticBat size={30} flapDuration="0.54s" />
       </div>
 
-      {/* Dramatic Crossing Bat (Animated across the screen) */}
+      {/* FOREGROUND CLOSE-RANGE CINEMATIC SWOOPING BATS (Depth plane 3) */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
-          animation: 'batFlyAcross 24s ease-in-out infinite 3s',
+          animation: 'batFlyAcross 22s ease-in-out infinite 2s',
+          filter: 'blur(0.8px)',
         }}
       >
-        <Bat size={58} flapDuration="0.38s" />
+        <RealisticBat size={68} flapDuration="0.34s" />
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          animation: 'batFlyAcross 28s ease-in-out infinite 14s',
+          filter: 'blur(1.4px)',
+        }}
+      >
+        <RealisticBat size={82} flapDuration="0.31s" />
       </div>
     </div>
   );

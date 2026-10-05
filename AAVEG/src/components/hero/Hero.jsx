@@ -1,5 +1,6 @@
 import React from 'react';
-import { Calendar, MapPin, Users, Play, ChevronDown, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Calendar, MapPin, Users, Play, Shield, Film, ArrowRight } from 'lucide-react';
 import HeroBackground from './HeroBackground';
 import Button from '../common/Button';
 import AavegHorrorText from './AavegHorrorText';
@@ -11,6 +12,7 @@ import FloatingElements from '../ui/FloatingElements';
 import Magnetic from '../ui/Magnetic';
 
 export default function Hero({ onOpenTeaser }) {
+  const navigate = useNavigate();
   return (
     <section
       className="hero-section relative min-h-screen w-full flex items-center justify-center overflow-hidden"
@@ -42,8 +44,8 @@ export default function Hero({ onOpenTeaser }) {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          paddingTop: '1.5rem',
-          paddingBottom: '3rem',
+          paddingTop: '0.75rem',
+          paddingBottom: '1.5rem',
         }}
       >
         {/* Fest Subtitle Tag with React Bits Glitch Decryption & ShinyText */}
@@ -106,8 +108,8 @@ export default function Hero({ onOpenTeaser }) {
               alignItems: 'center',
               justifyContent: 'center',
               gap: 'clamp(0.75rem, 2vw, 1.8rem)',
-              margin: '1.5rem 0',
-              padding: '10px 24px',
+              margin: '1rem 0',
+              padding: '8px 22px',
               borderRadius: '30px',
               background: 'rgba(10, 12, 16, 0.85)',
               border: '1px solid rgba(255, 77, 0, 0.35)',
@@ -142,7 +144,7 @@ export default function Hero({ onOpenTeaser }) {
           </div>
         </FloatingElements>
 
-        {/* Primary Action Buttons with Aceternity MovingBorder & React Bits Magnetic */}
+        {/* Primary Action Buttons: House Selection, Movie Saga & Teaser */}
         <div
           style={{
             display: 'flex',
@@ -153,7 +155,7 @@ export default function Hero({ onOpenTeaser }) {
             marginTop: '0.5rem',
           }}
         >
-          {/* Main Action: MovingBorder Animated Button with Magnetic feel */}
+          {/* Main Action: House Selection */}
           <Magnetic strength={0.25}>
             <MovingBorder duration={3200} color="#FF3B00">
               <Button
@@ -163,8 +165,10 @@ export default function Hero({ onOpenTeaser }) {
                 icon={<Shield size={18} />}
                 style={{
                   borderRadius: '30px',
-                  padding: '14px 32px',
-                  fontSize: '1rem',
+                  padding: '13px 30px',
+                  fontSize: '0.98rem',
+                  fontWeight: '800',
+                  boxShadow: '0 0 25px rgba(255, 77, 0, 0.5)',
                 }}
               >
                 SELECT YOUR HOUSE
@@ -172,59 +176,65 @@ export default function Hero({ onOpenTeaser }) {
             </MovingBorder>
           </Magnetic>
 
-          {/* Watch Official Teaser with Magnetic pull */}
+          {/* Sequence Link: Movie Saga Page */}
+          <Magnetic strength={0.2}>
+            <Button
+              to="/movie-saga"
+              variant="glass"
+              size="lg"
+              icon={<Film size={18} style={{ color: '#FF7700' }} />}
+              style={{
+                borderRadius: '30px',
+                padding: '13px 28px',
+                border: '1px solid rgba(255, 119, 0, 0.5)',
+                background: 'rgba(255, 77, 0, 0.12)',
+              }}
+            >
+              ENTER MOVIE SAGA
+            </Button>
+          </Magnetic>
+
+          {/* Watch Official Teaser Modal */}
           <Magnetic strength={0.2}>
             <Button
               onClick={onOpenTeaser}
               variant="outline"
               size="lg"
               icon={<Play size={17} style={{ fill: 'currentColor' }} />}
+              style={{
+                borderRadius: '30px',
+                padding: '13px 24px',
+              }}
             >
               WATCH TEASER
             </Button>
           </Magnetic>
-
-          {/* Experience The Movie with Magnetic pull
-          <Magnetic strength={0.2}>
-            <Button
-              onClick={() => {
-                const el = document.getElementById('festival-movie');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              variant="glass"
-              size="lg"
-              icon={<ChevronDown size={18} />}
-            >
-              THE MOVIE SAGA
-            </Button>
-          </Magnetic> */}
         </div>
 
-        {/* Scroll To Explore Indicator */}
+        {/* Next Page / Scroll Indicator */}
         <div
           style={{
-            marginTop: '2.5rem',
+            marginTop: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             gap: '6px',
-            opacity: 0.75,
+            opacity: 0.85,
             cursor: 'pointer',
+            transition: 'opacity 0.2s ease',
           }}
-          onClick={() => {
-            const el = document.getElementById('festival-movie');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onClick={() => navigate('/movie-saga')}
         >
           <div
             style={{
               width: '20px',
               height: '32px',
               borderRadius: '12px',
-              border: '1.5px solid rgba(255, 77, 0, 0.5)',
+              border: '1.5px solid rgba(255, 77, 0, 0.6)',
               display: 'flex',
               justifyContent: 'center',
-              paddingTop: '6px',
+              paddingTop: '5px',
+              background: 'rgba(255, 77, 0, 0.08)',
             }}
           >
             <div
@@ -239,13 +249,17 @@ export default function Hero({ onOpenTeaser }) {
           </div>
           <span
             style={{
-              fontSize: '0.68rem',
-              letterSpacing: '0.25em',
-              color: 'var(--text-muted)',
+              fontSize: '0.7rem',
+              fontWeight: '700',
+              letterSpacing: '0.22em',
+              color: 'var(--text-secondary)',
               textTransform: 'uppercase',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
             }}
           >
-            SCROLL TO ENTER MOVIE
+            CONTINUE TO MOVIE SAGA <ArrowRight size={13} style={{ color: '#FF4D00' }} />
           </span>
         </div>
       </div>
@@ -257,8 +271,8 @@ export default function Hero({ onOpenTeaser }) {
           bottom: 0,
           left: 0,
           width: '100%',
-          height: '200px',
-          background: 'linear-gradient(180deg, transparent 0%, rgba(3, 4, 7, 0.5) 45%, #030407 100%)',
+          height: '110px',
+          background: 'linear-gradient(180deg, transparent 0%, rgba(3, 4, 7, 0.7) 65%, #030406 100%)',
           pointerEvents: 'none',
           zIndex: 15,
         }}

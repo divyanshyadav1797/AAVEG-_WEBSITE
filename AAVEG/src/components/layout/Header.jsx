@@ -188,8 +188,17 @@ export default function Header() {
               </Magnetic>
             </div>
 
-            {/* Mobile Menu Trigger with Magnetic feel */}
-            <div className="mobile-only">
+            {/* Mobile Actions: House Selection CTA & Menu Toggle */}
+            <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Button
+                to={primaryCTA.to}
+                variant="primary"
+                size="sm"
+                icon={<Shield size={13} />}
+                style={{ padding: '6px 12px', fontSize: '0.75rem', fontWeight: '800' }}
+              >
+                HOUSES
+              </Button>
               <Magnetic strength={0.3}>
                 <button
                   type="button"

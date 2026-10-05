@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { createRealisticPumpkinModel } from '../../utils/realisticPumpkin';
 
@@ -9,6 +9,8 @@ import { createRealisticPumpkinModel } from '../../utils/realisticPumpkin';
  * - 10 authentic vertical bulging pumpkin lobes with deep crevices & top/bottom dimples
  * - Realistic PBR texturing with waxy rind sheen, organic fibers, and jagged glowing carved face
  * - Internal flickering flame light casting warm glow onto its body and the surrounding mist
+ * - Entrance jump & bounce physics with squash and stretch when the user enters the site
+ * - Interactive click replay to bounce anytime
  * - Subtle mouse-tracking parallax: the pumpkin turns to ominously watch the user
  * - Rising fire embers and ground contact shadow
  * - Full performance optimization: capped DPR, IntersectionObserver pausing, and clean WebGL disposal
@@ -16,19 +18,32 @@ import { createRealisticPumpkinModel } from '../../utils/realisticPumpkin';
 export default function Pumpkin({ className = '', style = {} }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
   const isVisibleRef = useRef(true);
+  const [isJumping, setIsJumping] = useState(false);
 
-  // Track mouse coordinates for subtle parallax eye contact
+  // Entrance Hop & Bounce on First Website Visit
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      mouseRef.current.targetX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseRef.current.targetY = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
+    const entranceTimeout = setTimeout(() => {
+      setIsJumping(true);
+    }, 400);
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const finishTimeout = setTimeout(() => {
+      setIsJumping(false);
+    }, 400 + 1200);
+
+    return () => {
+      clearTimeout(entranceTimeout);
+      clearTimeout(finishTimeout);
+    };
   }, []);
+
+  const triggerJump = () => {
+    if (isJumping) return;
+    setIsJumping(true);
+    setTimeout(() => {
+      setIsJumping(false);
+    }, 950);
+  };
 
   // Three.js 3D WebGL Canvas Scene
   useEffect(() => {
@@ -36,8 +51,8 @@ export default function Pumpkin({ className = '', style = {} }) {
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    let width = container.clientWidth || 220;
-    let height = container.clientHeight || 220;
+    let width = container.clientWidth || 250;
+    let height = container.clientHeight || 250;
 
     // 1. WebGL Renderer
     const renderer = new THREE.WebGLRenderer({
@@ -152,22 +167,12 @@ export default function Pumpkin({ className = '', style = {} }) {
 
       const elapsed = clock.getElapsedTime();
 
-      // Smooth mouse interpolation
-      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
-      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
-
       // Update pumpkin flame flicker and breathing
       pumpkin.update(elapsed);
 
       // Subtle breathing rhythm (idle vertical bobbing)
       const breathing = Math.sin(elapsed * 1.8) * 0.035;
       pumpkin.group.position.y = -0.15 + breathing;
-
-      // Realistic mouse tracking: pumpkin subtly swivels its head and body towards cursor
-      const targetRotY = -0.22 + mouseRef.current.x * 0.35;
-      const targetRotX = 0.08 - mouseRef.current.y * 0.18;
-      pumpkin.group.rotation.y += (targetRotY - pumpkin.group.rotation.y) * 0.06;
-      pumpkin.group.rotation.x += (targetRotX - pumpkin.group.rotation.x) * 0.06;
 
       // Animate rising ember particles
       const posAttr = emberGeom.attributes.position;
@@ -209,17 +214,22 @@ export default function Pumpkin({ className = '', style = {} }) {
     <div
       ref={containerRef}
       className={`hero-3d-pumpkin-wrapper ${className}`}
+      onClick={triggerJump}
+      title="Click Jack-o'-lantern to jump!"
       style={{
         position: 'absolute',
-        bottom: '6%',
-        left: '4%',
-        width: 'clamp(160px, 20vw, 290px)',
-        height: 'clamp(160px, 20vw, 290px)',
+        bottom: 'clamp(15px, 3.5vh, 40px)',
+        left: 'clamp(15px, 4vw, 75px)',
+        width: 'clamp(120px, 15vw, 210px)',
+        height: 'clamp(120px, 15vw, 210px)',
         zIndex: 12,
-        pointerEvents: 'none',
+        pointerEvents: 'auto',
+        cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        animation: isJumping ? 'pumpkinEntranceJump 0.95s cubic-bezier(0.25, 0.9, 0.35, 1) forwards' : undefined,
+        transformOrigin: 'bottom center',
         ...style,
       }}
     >
@@ -227,15 +237,17 @@ export default function Pumpkin({ className = '', style = {} }) {
       <div
         style={{
           position: 'absolute',
-          bottom: '8px',
-          left: '12%',
-          width: '76%',
-          height: '28px',
+          bottom: '6px',
+          left: '10%',
+          width: '80%',
+          height: '24px',
           borderRadius: '50%',
-          background: 'radial-gradient(ellipse at center, rgba(255, 80, 0, 0.45) 0%, rgba(30, 8, 2, 0.75) 45%, rgba(0, 0, 0, 0.95) 70%, transparent 85%)',
-          filter: 'blur(10px)',
+          background: 'radial-gradient(ellipse at center, rgba(255, 100, 10, 0.6) 0%, rgba(90, 20, 5, 0.45) 50%, transparent 80%)',
+          filter: 'blur(8px)',
           pointerEvents: 'none',
           zIndex: 1,
+          animation: isJumping ? 'pumpkinShadowBounce 0.95s cubic-bezier(0.25, 0.9, 0.35, 1) forwards' : undefined,
+          transformOrigin: 'center center',
         }}
       />
 

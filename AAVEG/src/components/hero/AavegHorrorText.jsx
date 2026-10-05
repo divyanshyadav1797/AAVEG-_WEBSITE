@@ -80,9 +80,9 @@ export default function AavegHorrorText() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        margin: '0.25rem 0 0.85rem 0',
+        margin: '0.15rem 0 0.5rem 0',
         width: '100%',
-        maxWidth: 'min(94vw, 1040px)',
+        maxWidth: 'min(92vw, 980px)',
         perspective: '1000px',
       }}
     >
@@ -132,7 +132,7 @@ export default function AavegHorrorText() {
             zIndex: 10,
             width: '100%',
             height: 'auto',
-            maxHeight: 'clamp(220px, 42vw, 440px)',
+            maxHeight: 'clamp(160px, 24vw, 320px)',
             objectFit: 'contain',
             transform: 'translateZ(15px)',
             filter:

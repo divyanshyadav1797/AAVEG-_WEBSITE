@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, RotateCcw, Volume2, VolumeX, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -46,7 +46,7 @@ export default function PumpkinJumpGame({ onClose }) {
   }, [highScore]);
 
   // Web Audio synthesizer for runner sounds
-  const playSound = (type) => {
+  const playSound = useCallback((type) => {
     if (!soundEnabled) return;
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -81,7 +81,7 @@ export default function PumpkinJumpGame({ onClose }) {
     } catch {
       // Audio fallback
     }
-  };
+  }, [soundEnabled]);
 
   const startGame = () => {
     const g = gameRef.current;
@@ -129,21 +129,26 @@ export default function PumpkinJumpGame({ onClose }) {
     }
   };
 
+  const jumpRef = useRef(jump);
+  jumpRef.current = jump;
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
   // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space' || e.key === 'ArrowUp') {
         e.preventDefault();
-        jump();
+        jumpRef.current();
       }
       if (e.key === 'Escape') {
-        onClose?.();
+        onCloseRef.current?.();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [gameState]);
+  }, []);
 
   // Main canvas runner loop
   useEffect(() => {
@@ -517,7 +522,7 @@ export default function PumpkinJumpGame({ onClose }) {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [gameState, soundEnabled]);
+  }, [gameState, soundEnabled, playSound]);
 
   return (
     <div

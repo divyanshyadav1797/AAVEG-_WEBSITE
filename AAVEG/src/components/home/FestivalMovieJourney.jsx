@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Flame,
   Sparkles,
@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Calendar,
   Compass,
+  Gamepad2,
 } from 'lucide-react';
 import Button from '../common/Button';
 import CardSpotlight from '../ui/CardSpotlight';
@@ -25,7 +26,11 @@ export default function FestivalMovieJourney() {
   const [activeNightTab, setActiveNightTab] = useState(0);
   const [movieProgress, setMovieProgress] = useState(0);
 
-  const actRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
+  const act0Ref = useRef(null);
+  const act1Ref = useRef(null);
+  const act2Ref = useRef(null);
+  const act3Ref = useRef(null);
+  const actRefs = useMemo(() => [act0Ref, act1Ref, act2Ref, act3Ref], []);
 
   // 4 Cinematic Movie Chapters
   const chapters = [
@@ -128,7 +133,7 @@ export default function FestivalMovieJourney() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [actRefs]);
 
   const scrollToAct = (actIdx) => {
     if (actRefs[actIdx] && actRefs[actIdx].current) {
@@ -871,6 +876,23 @@ export default function FestivalMovieJourney() {
                     SELECT YOUR HOUSE & REGISTER
                   </Button>
                 </MovingBorder>
+              </Magnetic>
+
+              <Magnetic strength={0.25}>
+                <Button
+                  to="/games"
+                  variant="primary"
+                  size="xl"
+                  icon={<Gamepad2 size={20} />}
+                  style={{
+                    fontSize: '1.15rem',
+                    padding: '16px 36px',
+                    background: 'linear-gradient(135deg, #FF5500 0%, #D81159 100%)',
+                    boxShadow: '0 0 35px rgba(255, 85, 0, 0.5), 0 8px 30px rgba(0,0,0,0.8)',
+                  }}
+                >
+                  CONTINUE TO MINI-GAMES →
+                </Button>
               </Magnetic>
 
               <Magnetic strength={0.3}>

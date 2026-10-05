@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Trophy, Crown, Clock, BarChart3, TrendingUp, Shield } from 'lucide-react';
+import { Trophy, Crown, Clock, BarChart3, Shield } from 'lucide-react';
 import SectionTitle from '../common/SectionTitle';
 import Button from '../common/Button';
 import BackgroundBeams from '../ui/BackgroundBeams';
@@ -56,8 +56,6 @@ export default function HostelWars() {
   const maxPoints = useMemo(() => {
     return Math.max(...sortedHouses.map((h) => h.points), 100);
   }, [sortedHouses]);
-
-  const leaderHouse = sortedHouses[0];
 
   return (
     <section

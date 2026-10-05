@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { HOUSES } from '../../data/registration';
@@ -23,7 +23,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
   const currentHouse = HOUSES[activeIndex];
 
   // Rotate to specific house index
-  const selectHouseIndex = (index) => {
+  const selectHouseIndex = useCallback((index) => {
     const diff = index - activeIndex;
     let shortestDiff = diff;
     if (diff > totalHouses / 2) shortestDiff = diff - totalHouses;
@@ -31,15 +31,15 @@ export default function CircularHouseSelector({ onSelectHouse }) {
 
     setRotationAngle((prev) => prev - shortestDiff * anglePerStep);
     setActiveIndex((index + totalHouses) % totalHouses);
-  };
+  }, [activeIndex, totalHouses, anglePerStep]);
 
-  const nextHouse = () => {
+  const nextHouse = useCallback(() => {
     selectHouseIndex((activeIndex + 1) % totalHouses);
-  };
+  }, [activeIndex, totalHouses, selectHouseIndex]);
 
-  const prevHouse = () => {
+  const prevHouse = useCallback(() => {
     selectHouseIndex((activeIndex - 1 + totalHouses) % totalHouses);
-  };
+  }, [activeIndex, totalHouses, selectHouseIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeIndex]);
+  }, [nextHouse, prevHouse]);
 
   const handleHouseConfirm = () => {
     if (onSelectHouse) {
